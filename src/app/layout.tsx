@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "@/css/tailwind.css";
+import Header from "@/components/nav/header";
 
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-dark-bg text-slate-50 ${notoSans.className}`}>
+      <body
+        className={`bg-gradient-default  text-slate-50 ${notoSans.className}`}
+      >
+        <Header />
         {children}
       </body>
     </html>
