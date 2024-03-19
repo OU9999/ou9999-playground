@@ -16,10 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`bg-gradient-default  text-slate-50 ${notoSans.className}`}
-      >
+    <html lang="en" className="dark">
+      <body className={`bg-black text-slate-50 ${notoSans.className}`}>
         <Header />
         {children}
       </body>
