@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`bg-black text-slate-50 ${notoSans.className}`}>
+      <body className={`bg-black text-slate-50 ${notoSans.className} `}>
         <Header />
         {children}
       </body>

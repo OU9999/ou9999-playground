@@ -47,6 +47,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "blur-black": "rgba(15, 15, 15, 0.4)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -69,6 +70,13 @@ const config = {
       },
       maxWidth: {
         "336": "84rem",
+      },
+      borderWidth: {
+        "1": "1px",
+      },
+      backgroundImage: {
+        "gradient-head":
+          "linear-gradient(to bottom, rgba(0,0,0,0.8) , rgba(0, 0, 0, 1)), linear-gradient(to right, rgb(0,112,243), rgb(248,28,229))",
       },
     },
   },
