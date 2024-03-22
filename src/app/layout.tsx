@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`bg-black text-slate-50 ${notoSans.className} `}>
         <Header />
+
         {children}
       </body>
     </html>
