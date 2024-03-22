@@ -1,6 +1,6 @@
 const HomePage = () => {
   return (
-    <div className="flex flex-col h-[3000px]">
+    <div className="w-full flex flex-col">
       <p>this is home</p>
     </div>
   );
