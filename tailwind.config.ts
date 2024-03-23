@@ -48,6 +48,8 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         "blur-black": "rgba(15, 15, 15, 0.4)",
+        "icon-from": "#C0E4DF",
+        "icon-to": "#BBBEE9",
       },
       borderRadius: {
         lg: "var(--radius)",
