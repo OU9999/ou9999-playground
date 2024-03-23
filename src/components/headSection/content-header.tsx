@@ -10,7 +10,7 @@ const ContentHeader = ({ title, text, badge }: ContentHeaderProps) => {
   return (
     <>
       {badge && (
-        <Badge className="cursor-pointer bg-gradient-to-r  hover:text-slate-400">
+        <Badge className="cursor-pointer font-bold bg-gradient-to-r text-slate-900 from-[#C0E4DF] to-[#BBBEE9] hover:text-slate-700">
           {badge}
         </Badge>
       )}
