@@ -16,7 +16,7 @@ const HomePage = () => {
         <TabsContent value="engineering">Engineering</TabsContent>
       </Tabs>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-5 md:px-1">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-1">
         <Card title="Naver Webtoon Transition" badge="ui" link="naver" />
         <Card
           title="AI text-to-image Generator"

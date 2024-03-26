@@ -14,15 +14,6 @@ const Header = () => {
             <p className="font-bold text-2xl relative top-[2px]">PLAYGROUND</p>
           </div>
         </Link>
-
-        <div className="flex space-x-2">
-          <Link href={"/"}>
-            <Button>Home</Button>
-          </Link>
-          <Link href={"/detail/naver"}>
-            <Button>Naver</Button>
-          </Link>
-        </div>
       </div>
     </header>
   );

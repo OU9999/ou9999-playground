@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "@/css/tailwind.css";
 import Header from "@/components/nav/header";
+import Footer from "@/components/nav/footer";
 
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -19,8 +20,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`bg-black text-slate-50 ${notoSans.className} `}>
         <Header />
-
         {children}
+        <Footer />
       </body>
     </html>
   );
