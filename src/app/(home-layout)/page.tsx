@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import Card from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -18,10 +17,11 @@ const HomePage = () => {
       </Tabs>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-5 md:px-1">
-        <Card title="Naver Webtoon Transition" badge="ui" />
+        <Card title="Naver Webtoon Transition" badge="ui" link="naver" />
         <Card
           title="AI text-to-image Generator"
           badge="engineering"
+          link="ai-tti"
           image="ai-text"
         />
       </div>
