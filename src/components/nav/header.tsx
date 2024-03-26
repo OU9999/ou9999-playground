@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
 import OwlIcon from "../svg/owl-icon";
 
 const Header = () => {
@@ -8,10 +7,12 @@ const Header = () => {
       <div className="w-full max-w-336 px-5 h-full flex justify-between items-center">
         <Link href={"/"}>
           <div className="flex space-x-1 cursor-pointer">
-            <div className="w-10 h-10">
+            <div className="w-8 h-8 md:w-10 md:h-10">
               <OwlIcon />
             </div>
-            <p className="font-bold text-2xl relative top-[2px]">PLAYGROUND</p>
+            <p className="font-bold text-xl md:text-2xl relative top-[1px] md:top-[2px]">
+              PLAYGROUND
+            </p>
           </div>
         </Link>
       </div>

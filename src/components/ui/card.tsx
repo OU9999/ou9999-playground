@@ -15,7 +15,7 @@ const Card = ({ title, badge, link, image }: CardProps) => {
 
   return (
     <Link href={`/detail/${link}`}>
-      <div className="h-72 min-h-72 rounded-md flex flex-col overflow-hidden border cursor-pointer transition-colors hover:border-slate-50">
+      <div className="h-72 min-h-72 rounded-md flex flex-col overflow-hidden border cursor-pointer transition-colors md:hover:border-slate-50">
         <div className="h-5/6 relative flex justify-center p-10">
           <div className="w-56 min-w-56 h-full relative">
             {image && (

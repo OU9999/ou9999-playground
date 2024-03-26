@@ -13,8 +13,8 @@ const ContentHeader = ({ title, text, badge }: ContentHeaderProps) => {
   return (
     <>
       {badge && <Badge variant={badge}>{badgeString}</Badge>}
-      <p className="text-5xl font-bold">{title}</p>
-      <p className="text-2xl text-slate-400">{text}</p>
+      <p className="text-4xl md:text-5xl font-bold">{title}</p>
+      <p className="text-xl md:text-2xl text-slate-400">{text}</p>
     </>
   );
 };
