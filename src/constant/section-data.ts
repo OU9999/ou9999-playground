@@ -5,7 +5,8 @@ export interface SectionData {
   badge: "ui" | "engineering";
   inspired: string;
   dependencies: string[];
-  date: string;
+  date: number;
+  image?: string;
 }
 
 const naverSectionData: SectionData = {
@@ -15,7 +16,7 @@ const naverSectionData: SectionData = {
   badge: "ui",
   inspired: "네이버 웹툰 앱",
   dependencies: ["test"],
-  date: "2024-03-27",
+  date: 20240327,
 };
 
 const aiTtiSectionData: SectionData = {
@@ -25,7 +26,10 @@ const aiTtiSectionData: SectionData = {
   badge: "engineering",
   inspired: "디시인사이드 ai 이미지 간편 등록",
   dependencies: ["test"],
-  date: "2024-03-27",
+  date: 20240326,
+  image: "ai-text",
 };
 
-export const allSectionData = [naverSectionData, aiTtiSectionData];
+const allData = [naverSectionData, aiTtiSectionData];
+
+export const allSectionData = allData.sort((a, b) => b.date - a.date);

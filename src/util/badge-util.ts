@@ -1,4 +1,4 @@
-type Badge = "ui" | "engineering";
+export type Badge = "ui" | "engineering";
 
 export const getBadgeString = (badge: Badge) => {
   let result;

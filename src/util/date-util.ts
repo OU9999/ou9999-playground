@@ -1,0 +1,1 @@
+const compareDate = (date: string) => {};
