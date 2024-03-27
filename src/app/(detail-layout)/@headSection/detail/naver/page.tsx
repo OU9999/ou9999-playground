@@ -1,11 +1,14 @@
 import ContentHeader from "@/components/headSection/content-header";
+import { getSectionDataByLink } from "@/util/section-data-util";
 
 const NaverHeadSection = () => {
+  const sectionData = getSectionDataByLink("naver");
+
   return (
     <ContentHeader
-      title="Naver Webtoon Transition"
-      text="네이버 웹툰 스타일 부드러운 트랜지션"
-      badge="ui"
+      title={sectionData?.title!}
+      text={sectionData?.description!}
+      badge={sectionData?.badge!}
     />
   );
 };

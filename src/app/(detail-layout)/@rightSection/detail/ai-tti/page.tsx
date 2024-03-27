@@ -1,10 +1,13 @@
 import ContentRightSection from "@/components/rightSection/content-right-section";
+import { getSectionDataByLink } from "@/util/section-data-util";
 
 const AiTtiRightSection = () => {
+  const sectionData = getSectionDataByLink("ai-tti");
+
   return (
     <ContentRightSection
-      inspired="디시인사이드 이미지 생성 ai"
-      dependencies={["test"]}
+      inspired={sectionData?.inspired!}
+      dependencies={sectionData?.dependencies!}
     />
   );
 };

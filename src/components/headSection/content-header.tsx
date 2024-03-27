@@ -1,4 +1,4 @@
-import { getBadgeString } from "@/util/badgeUtil";
+import { getBadgeString } from "@/util/badge-util";
 import { Badge } from "../ui/badge";
 
 interface ContentHeaderProps {

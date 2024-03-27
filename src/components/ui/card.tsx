@@ -1,4 +1,4 @@
-import { getBadgeString } from "@/util/badgeUtil";
+import { getBadgeString } from "@/util/badge-util";
 import { Badge } from "./badge";
 import Image from "next/image";
 import Link from "next/link";
