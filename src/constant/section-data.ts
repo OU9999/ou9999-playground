@@ -17,6 +17,7 @@ const naverSectionData: SectionData = {
   inspired: "네이버 웹툰 앱",
   dependencies: ["test"],
   date: 20240327,
+  image: undefined,
 };
 
 const aiTtiSectionData: SectionData = {
@@ -27,7 +28,7 @@ const aiTtiSectionData: SectionData = {
   inspired: "디시인사이드 ai 이미지 간편 등록",
   dependencies: ["test"],
   date: 20240326,
-  image: "ai-text",
+  image: "ai-tti",
 };
 
 const allData = [naverSectionData, aiTtiSectionData];

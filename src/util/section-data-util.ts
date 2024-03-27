@@ -22,7 +22,6 @@ export const getTabsFromSectionData = () => {
     }
   });
 
-  console.log(badgesCount);
   const tabsCountArray: TabsCount[] = Object.entries(badgesCount).map(
     ([tab, count]) => ({
       tab,

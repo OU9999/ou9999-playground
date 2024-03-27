@@ -18,6 +18,7 @@ const CardGrid = ({ content }: CardGridProps) => {
           title={data.title}
           badge={data.badge}
           link={data.link}
+          image={data.image}
         />
       ))}
     </div>
