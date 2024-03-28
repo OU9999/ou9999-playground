@@ -79,6 +79,8 @@ const config = {
       backgroundImage: {
         "gradient-head":
           "linear-gradient(to bottom, rgba(0,0,0,0.8) , rgba(0, 0, 0, 1)), linear-gradient(to right, rgb(0,112,243), rgb(248,28,229))",
+        "grid-background":
+          "linear-gradient(to right, rgba(150,150,150,0.1) 1px, #0000 1px), linear-gradient(to bottom, rgba(150,150,150,0.1) 1px, #0000 1px)",
       },
     },
   },

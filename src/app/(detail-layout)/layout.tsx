@@ -20,7 +20,7 @@ const DetailLayout = ({
           </div>
         </div>
         <div className="w-full max-w-336 flex h-full px-5 space-x-5">
-          <div className="w-full max-w-full md:max-w-[75%] md:border-r-1  border-slate-800 ">
+          <div className="w-full max-w-full md:max-w-[75%] md:border-r-1 border-slate-800 ">
             {children}
           </div>
           <div className="w-full max-w-[25%] hidden md:inline-block">
