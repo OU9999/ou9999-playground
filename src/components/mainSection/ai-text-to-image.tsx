@@ -18,7 +18,7 @@ const AiTextToImage = () => {
         </div>
       </div>
 
-      <div className="w-72 h-72 md:w-96 md:h-96 min-w-72 min-h-72 md:min-w-96 md:min-h-96 rounded-lg flex justify-center items-center border bg-black">
+      <div className="relative w-72 h-72 md:w-96 md:h-96 min-w-72 min-h-72 md:min-w-96 md:min-h-96 rounded-lg flex justify-center items-center border bg-black">
         이미지
       </div>
     </div>
