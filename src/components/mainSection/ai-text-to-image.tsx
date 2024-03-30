@@ -1,8 +1,8 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import {
   Form,
   FormControl,
@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { getReplicateOutput } from "@/script/server-action";
 import {
   Select,
   SelectContent,
@@ -20,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useState } from "react";
+import { getReplicateOutput } from "@/script/server-action";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectFormData, getAiModelText } from "@/util/stability-ai-util";
@@ -48,6 +47,7 @@ const AiTextToImage = () => {
   //state
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [imgSrc, setImgSrc] = useState<any>(null);
 
   //form
@@ -59,6 +59,7 @@ const AiTextToImage = () => {
     setIsError(false);
     setIsLoading(true);
     setImgSrc(null);
+    setErrorMessage(null);
 
     const promptValue = formData.prompt;
     const model = getAiModelText(formData.select as SelectFormData);
@@ -69,10 +70,9 @@ const AiTextToImage = () => {
       setImgSrc(data);
     } else {
       setIsError(true);
+      setErrorMessage(data);
     }
 
-    console.log("data is >>", data);
-    console.log("data type is >>", typeof data);
     setIsLoading(false);
   };
 
@@ -80,10 +80,6 @@ const AiTextToImage = () => {
 
   return (
     <>
-      {isLoading && <p>LOADING....</p>}
-      {isError && <p>Fucking error</p>}
-      {imgSrc && <p>{imgSrc[0]}</p>}
-
       <div className="flex flex-col xl:flex-row mx-0 md:mx-10 space-y-10 xl:space-y-0 space-x-0 xl:space-x-5  h-auto justify-center items-center content-center p-10 border rounded-md bg-[length:2rem_2rem]  md:bg-[length:4rem_4rem] bg-grid-background">
         <div className="flex w-72 md:w-96 space-y-2">
           <Form {...form}>
@@ -109,11 +105,11 @@ const AiTextToImage = () => {
                 name="select"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>ai 모델</FormLabel>
+                    <FormLabel>AI 모델</FormLabel>
                     <Select {...field} onValueChange={field.onChange}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a verified email to display" />
+                          <SelectValue placeholder="AI 모델을 선택해주세요." />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -124,14 +120,14 @@ const AiTextToImage = () => {
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      You can manage email addresses in your
+                      모델별로 이미지 스타일이 다릅니다.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button disabled={isLoading} type="submit">
-                submit
+                실행
               </Button>
             </form>
           </Form>
@@ -139,9 +135,21 @@ const AiTextToImage = () => {
 
         <div className="relative w-72 h-72 md:w-96 md:h-96 min-w-72 min-h-72 md:min-w-96 md:min-h-96 rounded-lg overflow-hidden flex justify-center items-center border bg-[#020817]">
           {imgSrc !== null ? (
-            <Image alt="ai-image" src={imgSrc[0]} fill />
+            <Image
+              alt="ai-image"
+              src={imgSrc[0]}
+              fill
+              placeholder="blur"
+              blurDataURL={
+                "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPce/h4PQAHVALI8GDtfQAAAABJRU5ErkJggg=="
+              }
+            />
+          ) : isError ? (
+            <p className="text-red-500 text-xs md:text-sm w-full text-center">
+              {errorMessage}
+            </p>
           ) : (
-            <p>image</p>
+            <p>{isLoading ? "로딩중..." : "이미지"}</p>
           )}
         </div>
       </div>

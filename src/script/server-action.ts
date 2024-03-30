@@ -10,15 +10,17 @@ export const getReplicateOutput = async (
       auth: process.env.NEXT_PUBLIC_REPLICATE_API_TOKEN,
     });
 
+    const input = {
+      prompt: prompt,
+      image_dimensions: "512x512",
+      num_inference_steps: 12,
+      num_outputs: 1,
+      guideance_scale: 3.5,
+      scheduler: "K_EULER",
+    };
+
     const output = await replicate.run(model, {
-      input: {
-        prompt: prompt,
-        image_dimensions: "512x512",
-        num_inference_steps: 12,
-        num_outputs: 1,
-        guideance_scale: 3.5,
-        scheduler: "K_EULER",
-      },
+      input,
     });
 
     return output;
