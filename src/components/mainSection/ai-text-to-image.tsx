@@ -24,6 +24,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectFormData, getAiModelText } from "@/util/stability-ai-util";
 import Image from "next/image";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import ReCaptcha from "../common/re-captcha";
 
 interface FormCustomData {
   prompt: string;
@@ -35,6 +46,7 @@ const FormSchema = z.object({
     .string({
       required_error: "프롬프트는 빈칸일 수 없습니다.",
     })
+    .min(1, { message: "프롬프트는 빈칸일 수 없습니다." })
     .regex(/^[a-zA-Z\s,]*$/, {
       message: "영단어, 공백, 쉼표만 사용 가능합니다.",
     }),
@@ -47,6 +59,8 @@ const AiTextToImage = () => {
   //state
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isCertification, setIsCertification] = useState(false);
+  const [isRecap, setIsRecap] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [imgSrc, setImgSrc] = useState<any>(null);
 
@@ -78,12 +92,18 @@ const AiTextToImage = () => {
 
   const onSubmit = form.handleSubmit(getReplicateData);
 
+  const test = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  };
+
   return (
     <>
       <div className="flex flex-col xl:flex-row mx-0 md:mx-10 space-y-10 xl:space-y-0 space-x-0 xl:space-x-5  h-auto justify-center items-center content-center p-10 border rounded-md bg-[length:2rem_2rem]  md:bg-[length:4rem_4rem] bg-grid-background">
         <div className="flex w-72 md:w-96 space-y-2">
           <Form {...form}>
-            <form onSubmit={onSubmit} className="w-full space-y-8">
+            <form onSubmit={onSubmit} className="w-full relative space-y-8">
               <FormField
                 control={form.control}
                 name="prompt"
@@ -126,9 +146,40 @@ const AiTextToImage = () => {
                   </FormItem>
                 )}
               />
-              <Button disabled={isLoading} type="submit">
-                실행
-              </Button>
+              {isCertification ? (
+                <Button disabled={isLoading} type="submit">
+                  실행
+                </Button>
+              ) : (
+                <>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button type="button">실행</Button>
+                    </DialogTrigger>
+                    <DialogContent
+                      className="sm:max-w-md"
+                      onEscapeKeyDown={test}
+                      onPointerDown={test}
+                      onInteractOutside={test}
+                    >
+                      <DialogHeader>
+                        <DialogTitle>123</DialogTitle>
+                        <DialogDescription>123</DialogDescription>
+                      </DialogHeader>
+                      <div className="w-full relative flex justify-center items-center">
+                        <ReCaptcha onChange={() => setIsCertification(true)} />
+                      </div>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                          <Button type="button" disabled={isCertification}>
+                            Close
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </>
+              )}
             </form>
           </Form>
         </div>
