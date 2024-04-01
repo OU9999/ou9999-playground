@@ -24,17 +24,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectFormData, getAiModelText } from "@/util/stability-ai-util";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 import ReCaptcha from "../common/re-captcha";
+import LoadingSpinner from "../common/loading-spinner";
 
 interface FormCustomData {
   prompt: string;
@@ -60,7 +51,6 @@ const AiTextToImage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isCertification, setIsCertification] = useState(false);
-  const [isRecap, setIsRecap] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [imgSrc, setImgSrc] = useState<any>(null);
 
@@ -146,39 +136,13 @@ const AiTextToImage = () => {
                   </FormItem>
                 )}
               />
-              {isCertification ? (
-                <Button disabled={isLoading} type="submit">
-                  실행
-                </Button>
-              ) : (
-                <>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button type="button">실행</Button>
-                    </DialogTrigger>
-                    <DialogContent
-                      className="sm:max-w-md"
-                      onEscapeKeyDown={test}
-                      onPointerDown={test}
-                      onInteractOutside={test}
-                    >
-                      <DialogHeader>
-                        <DialogTitle>123</DialogTitle>
-                        <DialogDescription>123</DialogDescription>
-                      </DialogHeader>
-                      <div className="w-full relative flex justify-center items-center">
-                        <ReCaptcha onChange={() => setIsCertification(true)} />
-                      </div>
-                      <DialogFooter className="sm:justify-start">
-                        <DialogClose asChild>
-                          <Button type="button" disabled={isCertification}>
-                            Close
-                          </Button>
-                        </DialogClose>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </>
+
+              <Button disabled={isLoading || !isCertification} type="submit">
+                실행
+              </Button>
+
+              {!isCertification && (
+                <ReCaptcha onChange={() => setIsCertification(true)} />
               )}
             </form>
           </Form>
@@ -199,8 +163,10 @@ const AiTextToImage = () => {
             <p className="text-red-500 text-xs md:text-sm w-full text-center">
               {errorMessage}
             </p>
+          ) : isLoading ? (
+            <LoadingSpinner />
           ) : (
-            <p>{isLoading ? "로딩중..." : "이미지"}</p>
+            <p>이미지</p>
           )}
         </div>
       </div>
