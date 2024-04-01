@@ -23,7 +23,7 @@ export const getReplicateOutput = async (
       input,
     });
 
-    return output;
+    return output as string[];
   } catch (err) {
     return String(err);
   }

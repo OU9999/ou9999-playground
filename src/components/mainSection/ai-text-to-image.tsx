@@ -52,7 +52,7 @@ const AiTextToImage = () => {
   const [isError, setIsError] = useState(false);
   const [isCertification, setIsCertification] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [imgSrc, setImgSrc] = useState<any>(null);
+  const [imgSrc, setImgSrc] = useState<string[] | null>(null);
 
   //form
   const form = useForm<z.infer<typeof FormSchema>>({
