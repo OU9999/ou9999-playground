@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`bg-black text-slate-50 ${notoSans.className} `}>
+      <body
+        className={`bg-black text-slate-50 ${notoSans.className} max-w-dvw overflow-x-hidden`}
+      >
         <Header />
         {children}
         <Footer />

@@ -7,6 +7,7 @@ export interface SectionData {
   dependencies: string[];
   date: number;
   image?: string;
+  published: boolean;
 }
 
 const naverSectionData: SectionData = {
@@ -18,6 +19,7 @@ const naverSectionData: SectionData = {
   dependencies: ["test"],
   date: 20240327,
   image: undefined,
+  published: true,
 };
 
 const aiTtiSectionData: SectionData = {
@@ -33,8 +35,11 @@ const aiTtiSectionData: SectionData = {
   ],
   date: 20240326,
   image: "ai-tti",
+  published: true,
 };
 
 const allData = [naverSectionData, aiTtiSectionData];
 
-export const allSectionData = allData.sort((a, b) => b.date - a.date);
+const allFilteredData = allData.filter((data) => data.published);
+
+export const allSectionData = allFilteredData.sort((a, b) => b.date - a.date);

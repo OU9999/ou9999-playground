@@ -90,7 +90,7 @@ const AiTextToImage = () => {
 
   return (
     <>
-      <div className="flex flex-col xl:flex-row mx-0 md:mx-10 space-y-10 xl:space-y-0 space-x-0 xl:space-x-5  h-auto justify-center items-center content-center p-10 border rounded-md bg-[length:2rem_2rem]  md:bg-[length:4rem_4rem] bg-grid-background">
+      <div className="flex flex-col xl:flex-row space-y-10 xl:space-y-0 space-x-0 xl:space-x-5 h-auto justify-center items-center content-center p-10 border rounded-md bg-[length:2rem_2rem] md:bg-[length:4rem_4rem] bg-grid-background">
         <div className="flex w-72 md:w-96 space-y-2">
           <Form {...form}>
             <form onSubmit={onSubmit} className="w-full relative space-y-8">
