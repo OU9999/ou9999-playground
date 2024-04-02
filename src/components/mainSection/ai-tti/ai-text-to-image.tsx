@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
 import {
   Form,
   FormControl,
@@ -11,21 +11,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "../../ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 import { getReplicateOutput } from "@/script/server-action";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectFormData, getAiModelText } from "@/util/stability-ai-util";
 import Image from "next/image";
-import ReCaptcha from "../common/re-captcha";
-import LoadingSpinner from "../common/loading-spinner";
+import ReCaptcha from "../../common/re-captcha";
+import LoadingSpinner from "../../common/loading-spinner";
 
 interface FormCustomData {
   prompt: string;

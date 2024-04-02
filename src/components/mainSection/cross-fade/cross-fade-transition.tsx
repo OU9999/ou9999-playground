@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "../../ui/card";
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "../ui/carousel";
+} from "../../ui/carousel";
 import Image from "next/image";
 
 const sanrioData = [

@@ -1,4 +1,4 @@
-import AiTextToImage from "@/components/mainSection/ai-text-to-image";
+import AiTextToImage from "@/components/mainSection/ai-tti/ai-text-to-image";
 
 const AiTtiDetailPage = async () => {
   return (
