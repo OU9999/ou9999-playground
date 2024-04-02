@@ -1,8 +1,8 @@
 import ContentHeader from "@/components/headSection/content-header";
 import { getSectionDataByLink } from "@/util/section-data-util";
 
-const NaverHeadSection = () => {
-  const sectionData = getSectionDataByLink("naver");
+const CrossFadeHeadSection = () => {
+  const sectionData = getSectionDataByLink("cross-fade");
 
   return (
     <ContentHeader
@@ -13,4 +13,4 @@ const NaverHeadSection = () => {
   );
 };
 
-export default NaverHeadSection;
+export default CrossFadeHeadSection;

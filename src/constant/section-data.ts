@@ -10,13 +10,13 @@ export interface SectionData {
   published: boolean;
 }
 
-const naverSectionData: SectionData = {
-  title: "Naver Webtoon Transition",
-  link: "naver",
-  description: "네이버 웹툰 스타일 부드러운 트랜지션",
+const crossFadeSectionData: SectionData = {
+  title: "Carousel Crossfade",
+  link: "cross-fade",
+  description: "네이버 웹툰 스타일 크로스 페이드 트랜지션",
   badge: "ui",
   inspired: "네이버 웹툰 앱",
-  dependencies: ["test"],
+  dependencies: ["embla-carousel-react@^8.0.0"],
   date: 20240327,
   image: undefined,
   published: true,
@@ -38,7 +38,7 @@ const aiTtiSectionData: SectionData = {
   published: true,
 };
 
-const allData = [naverSectionData, aiTtiSectionData];
+const allData = [crossFadeSectionData, aiTtiSectionData];
 
 const allFilteredData = allData.filter((data) => data.published);
 

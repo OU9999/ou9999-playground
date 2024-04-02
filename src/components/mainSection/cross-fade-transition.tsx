@@ -38,7 +38,7 @@ const sanrioData = [
   },
 ];
 
-const NaverTransition = () => {
+const CrossFadeTransition = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [opacity, setOpacity] = useState([1, 0, 0, 0, 0]);
 
@@ -87,7 +87,9 @@ const NaverTransition = () => {
           <CarouselContent>
             {sanrioData.map((item, index) => (
               <CarouselItem key={item.text + index} className={`basis-10/12`}>
-                <Card className={`${item.bg} border-none cursor-grab`}>
+                <Card
+                  className={`${item.bg} border-none cursor-grab shadow-xl`}
+                >
                   <CardContent className="flex items-center justify-center p-6 h-10">
                     <p className={`font-semibold`}>{item.text}</p>
                   </CardContent>
@@ -101,4 +103,4 @@ const NaverTransition = () => {
   );
 };
 
-export default NaverTransition;
+export default CrossFadeTransition;

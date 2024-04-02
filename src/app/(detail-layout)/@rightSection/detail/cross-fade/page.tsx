@@ -1,8 +1,8 @@
 import ContentRightSection from "@/components/rightSection/content-right-section";
 import { getSectionDataByLink } from "@/util/section-data-util";
 
-const NaverRightSection = () => {
-  const sectionData = getSectionDataByLink("naver");
+const CrossFadeRightSection = () => {
+  const sectionData = getSectionDataByLink("cross-fade");
 
   return (
     <ContentRightSection
@@ -12,4 +12,4 @@ const NaverRightSection = () => {
   );
 };
 
-export default NaverRightSection;
+export default CrossFadeRightSection;
