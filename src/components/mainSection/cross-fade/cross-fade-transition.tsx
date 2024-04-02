@@ -9,6 +9,7 @@ import {
   CarouselItem,
 } from "../../ui/carousel";
 import Image from "next/image";
+import GridBox from "@/components/ui/grid-box";
 
 const sanrioData = [
   {
@@ -64,7 +65,7 @@ const CrossFadeTransition = () => {
   }, [api]);
 
   return (
-    <div className="w-full flex justify-center items-center h-96 p-10 border rounded-md bg-[length:2rem_2rem] md:bg-[length:4rem_4rem] bg-grid-background">
+    <GridBox className="w-full h-96 p-10">
       <div className="w-full h-64 max-w-sm border rounded-md relative  bg-slate-700">
         {sanrioData.map((item, index) => (
           <div
@@ -99,7 +100,7 @@ const CrossFadeTransition = () => {
           </CarouselContent>
         </Carousel>
       </div>
-    </div>
+    </GridBox>
   );
 };
 
