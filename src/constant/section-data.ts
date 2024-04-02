@@ -18,7 +18,7 @@ const crossFadeSectionData: SectionData = {
   inspired: "네이버 웹툰 앱",
   dependencies: ["embla-carousel-react@^8.0.0"],
   date: 20240327,
-  image: undefined,
+  image: "cross-fade",
   published: true,
 };
 
