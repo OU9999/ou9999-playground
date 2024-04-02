@@ -48,8 +48,6 @@ const NaverTransition = () => {
     }
 
     api.on("scroll", () => {
-      console.log(api.scrollProgress());
-
       const progress = api.scrollProgress();
       const index = Math.floor(progress * sanrioData.length);
       const nextIndex = (index + 1) % sanrioData.length;
@@ -89,7 +87,7 @@ const NaverTransition = () => {
           <CarouselContent>
             {sanrioData.map((item, index) => (
               <CarouselItem key={item.text + index} className={`basis-10/12`}>
-                <Card className={`${item.bg}`}>
+                <Card className={`${item.bg} border-none cursor-grab`}>
                   <CardContent className="flex items-center justify-center p-6 h-10">
                     <p className={`font-semibold`}>{item.text}</p>
                   </CardContent>
