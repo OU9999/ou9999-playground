@@ -28,11 +28,7 @@ const aiTtiSectionData: SectionData = {
   description: "text to image",
   badge: "engineering",
   inspired: "디시인사이드 ai 이미지 간편 등록",
-  dependencies: [
-    "replicate@^0.29.1",
-    "stable-diffusion:ac732df8",
-    "sdxl:39ed52f2",
-  ],
+  dependencies: ["replicate@^0.29.1", "stable-diffusion@2.1", "sdxl@"],
   date: 20240326,
   image: "ai-tti",
   published: true,

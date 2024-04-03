@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { getReplicateOutput } from "@/script/server-action";
+import { getReplicateOutput } from "@/server/server-action";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectFormData, getAiModelText } from "@/util/stability-ai-util";
@@ -27,6 +27,7 @@ import Image from "next/image";
 import ReCaptcha from "../../common/re-captcha";
 import LoadingSpinner from "../../common/loading-spinner";
 import GridBox from "@/components/ui/grid-box";
+import { isOverThirtyMinutes } from "@/util/date-util";
 
 interface FormCustomData {
   prompt: string;
@@ -49,16 +50,46 @@ const FormSchema = z.object({
 
 const AiTextToImage = () => {
   //state
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isCertification, setIsCertification] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isCertification, setIsCertification] = useState<boolean>(
+    Boolean(sessionStorage.getItem("certification")) || false
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [imgSrc, setImgSrc] = useState<string[] | null>(null);
+  const [count, setCount] = useState<number>(
+    Number(localStorage.getItem("count") || 0)
+  );
 
   //form
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
+  //localStorage
+  useEffect(() => {
+    if (count < 3) {
+      return;
+    }
+
+    setIsError(true);
+    setErrorMessage("너무 많은 요청을 보냈습니다.");
+  }, [count]);
+
+  useEffect(() => {
+    const lastRequestTime = localStorage.getItem("date");
+    if (lastRequestTime) {
+      const overThirtyMinute = isOverThirtyMinutes(lastRequestTime);
+
+      if (overThirtyMinute) {
+        localStorage.removeItem("date");
+        localStorage.removeItem("count");
+        setIsError(false);
+        setErrorMessage(null);
+        setCount(0);
+      }
+    }
+  }, []);
 
   const getReplicateData = async (formData: FormCustomData) => {
     setIsError(false);
@@ -69,24 +100,31 @@ const AiTextToImage = () => {
     const promptValue = formData.prompt;
     const model = getAiModelText(formData.select as SelectFormData);
 
-    const data = await getReplicateOutput(promptValue, model!);
+    const output = await getReplicateOutput(promptValue, model!);
 
-    if (typeof data === "object") {
-      setImgSrc(data);
+    if (typeof output === "object") {
+      setImgSrc(output);
     } else {
       setIsError(true);
-      setErrorMessage(data);
+      setErrorMessage(output);
     }
 
     setIsLoading(false);
+
+    const currentCount = Number(localStorage.getItem("count") || 0) + 1;
+    localStorage.setItem("count", String(currentCount));
+    setCount(currentCount);
+
+    if (currentCount >= 3) {
+      localStorage.setItem("date", String(Date.now()));
+    }
   };
 
   const onSubmit = form.handleSubmit(getReplicateData);
 
-  const test = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
+  const setCertification = () => {
+    setIsCertification(true);
+    sessionStorage.setItem("certification", String(true));
   };
 
   return (
@@ -137,12 +175,22 @@ const AiTextToImage = () => {
               )}
             />
 
-            <Button disabled={isLoading || !isCertification} type="submit">
+            <Button
+              disabled={
+                isLoading ||
+                !isCertification ||
+                Number(localStorage.getItem("count"!)) >= 3
+              }
+              type="submit"
+            >
               실행
             </Button>
 
-            {!isCertification && (
-              <ReCaptcha onChange={() => setIsCertification(true)} />
+            {!isCertification && <ReCaptcha onChange={setCertification} />}
+            {isError && (
+              <p className="text-red-500 text-xs md:text-sm w-full text-center">
+                {errorMessage}
+              </p>
             )}
           </form>
         </Form>
@@ -159,10 +207,6 @@ const AiTextToImage = () => {
               "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPce/h4PQAHVALI8GDtfQAAAABJRU5ErkJggg=="
             }
           />
-        ) : isError ? (
-          <p className="text-red-500 text-xs md:text-sm w-full text-center">
-            {errorMessage}
-          </p>
         ) : isLoading ? (
           <LoadingSpinner />
         ) : (
