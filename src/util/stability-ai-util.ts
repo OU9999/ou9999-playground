@@ -1,3 +1,5 @@
+import { nsfwList } from "@/constant/nsfw-list";
+
 export type SelectFormData = "sdxl" | "stable-diffusion";
 
 type ModelText = `${string}/${string}` | `${string}/${string}:${string}` | null;
@@ -17,6 +19,34 @@ export const getAiModelText = (select: SelectFormData): ModelText => {
 
     default:
       result = null;
+      break;
+  }
+
+  return result;
+};
+
+export const checkHasNSFWPrompt = (prompt: string) => {
+  const splitPrompt = prompt.split(",");
+  for (let i = 0; i < splitPrompt.length; i++) {
+    if (nsfwList.includes(splitPrompt[i])) return true;
+  }
+
+  return false;
+};
+
+export const getKoreanErrorMessage = (error: string) => {
+  const nsfw =
+    "Error: Prediction failed: NSFW content detected. Try running it again, or try a different prompt.";
+
+  let result;
+
+  switch (error) {
+    case nsfw:
+      result = "부적절한 프롬프트가 발견됐습니다. 다른 프롬프트를 넣어주세요.";
+      break;
+
+    default:
+      result = error;
       break;
   }
 
