@@ -17,7 +17,7 @@ const crossFadeSectionData: SectionData = {
   badge: "ui",
   inspired: "네이버 웹툰 앱",
   dependencies: ["embla-carousel-react@^8.0.0"],
-  date: 20240327,
+  date: 20240401,
   image: "cross-fade",
   published: true,
 };
@@ -25,11 +25,11 @@ const crossFadeSectionData: SectionData = {
 const aiTtiSectionData: SectionData = {
   title: "AI text-to-image Generator",
   link: "ai-tti",
-  description: "text to image",
+  description: "next.js 서버 액션 + replicate",
   badge: "engineering",
   inspired: "디시인사이드 ai 이미지 간편 등록",
-  dependencies: ["replicate@^0.29.1", "stable-diffusion@2.1", "sdxl@"],
-  date: 20240326,
+  dependencies: ["replicate@^0.29.1", "stable-diffusion@2.1", "sdxl@1"],
+  date: 20240404,
   image: "ai-tti",
   published: true,
 };
