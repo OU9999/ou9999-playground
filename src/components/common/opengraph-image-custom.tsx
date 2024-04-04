@@ -38,8 +38,8 @@ const OpenGraphImageCustom = async (imgSrc: string) => {
             right: 0,
             bottom: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            width: 1200,
+            height: 630,
             objectFit: "cover",
           }}
         />
