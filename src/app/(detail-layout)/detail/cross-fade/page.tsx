@@ -1,10 +1,12 @@
 import CrossFadeTransition from "@/components/mainSection/cross-fade/cross-fade-transition";
+import { getMetaDataFromSectionData } from "@/util/meta-data-util";
 import { getSectionDataByLink } from "@/util/section-data-util";
 
 export const generateMetadata = () => {
-  const sectionData = getSectionDataByLink("cross-fade");
-  const title = `${sectionData?.title} | ou`;
-  const description = `${sectionData?.description} | ou`;
+  const sectionData = getSectionDataByLink("ai-tti");
+  const { title, description, thumbnail } = getMetaDataFromSectionData(
+    sectionData!
+  );
 
   return {
     title,
@@ -12,6 +14,9 @@ export const generateMetadata = () => {
     openGraph: {
       title,
       description,
+      images: {
+        url: thumbnail,
+      },
     },
   };
 };
