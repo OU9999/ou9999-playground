@@ -22,7 +22,7 @@ const MainCard = ({ title, badge, link, image }: MainCardProps) => {
               <Image
                 alt="card-image"
                 fill
-                src={`/imgs/thumbnail/${image}.webp`}
+                src={`/imgs/thumbnail/${image}.png`}
               />
             )}
           </div>
