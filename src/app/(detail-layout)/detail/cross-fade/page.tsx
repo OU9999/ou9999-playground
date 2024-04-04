@@ -3,7 +3,7 @@ import { getMetaDataFromSectionData } from "@/util/meta-data-util";
 import { getSectionDataByLink } from "@/util/section-data-util";
 
 export const generateMetadata = () => {
-  const sectionData = getSectionDataByLink("ai-tti");
+  const sectionData = getSectionDataByLink("cross-fade");
   const { title, description, thumbnail } = getMetaDataFromSectionData(
     sectionData!
   );
