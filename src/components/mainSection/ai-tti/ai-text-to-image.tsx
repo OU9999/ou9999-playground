@@ -47,6 +47,7 @@ const FormSchema = z.object({
     required_error: "ai 모델을 선택해야 합니다.",
   }),
 });
+
 interface FormCustomData {
   prompt: string;
   select: string;
@@ -146,6 +147,11 @@ const AiTextToImage = () => {
     setErrorMessage(errorMessage);
   };
 
+  const setCertificationSuccess = () => {
+    setIsCertification(true);
+    sessionStorage.setItem("certification", String(true));
+  };
+
   const getReplicateData = async (formData: FormCustomData) => {
     setIsError(false);
     setIsLoading(true);
@@ -178,11 +184,6 @@ const AiTextToImage = () => {
     if (currentCount >= MAX_COUNT) {
       localStorage.setItem("date", String(Date.now()));
     }
-  };
-
-  const setCertificationSuccess = () => {
-    setIsCertification(true);
-    sessionStorage.setItem("certification", String(true));
   };
 
   //storage
