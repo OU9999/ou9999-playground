@@ -107,7 +107,7 @@ const ReplicateForm = ({
           )}
         />
 
-        <div className="w-full flex flex-col space-x-0 xl:space-x-3 space-y-3 xl:space-y-0 xl:flex-row justify-center items-center">
+        <div className="w-full flex flex-col space-x-0 xl:space-x-3 space-y-3 xl:space-y-0 xl:flex-row items-center">
           <Button disabled={disable} type="submit" className="w-full xl:w-auto">
             실행
           </Button>

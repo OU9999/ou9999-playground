@@ -48,7 +48,10 @@ const AiTextToImage = () => {
     const promptValue = formData.prompt;
     const hasNSFWWord = checkHasNSFWPrompt(promptValue);
     if (hasNSFWWord) {
-      setIsError(true);
+      setErrorAndMessage(
+        "부적절한 프롬프트가 발견됐습니다. 다른 프롬프트를 넣어주세요."
+      );
+      setIsLoading(false);
       return;
     }
 
