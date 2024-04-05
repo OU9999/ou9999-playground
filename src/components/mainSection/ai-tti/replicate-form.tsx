@@ -75,7 +75,9 @@ const ReplicateForm = ({
               <FormControl>
                 <Input placeholder="robot, cat, rainbow" {...field} />
               </FormControl>
-              <FormDescription>단어는 쉼표(,)로 구분합니다.</FormDescription>
+              <FormDescription>
+                프롬프트는 쉼표(,)로 구분합니다.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
