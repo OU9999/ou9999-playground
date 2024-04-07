@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getReplicateOutput } from "@/actions/replicate-action";
+import { getReplicateOutput } from "@/action/replicate-action";
 import {
   SelectFormData,
   checkHasNSFWPrompt,
