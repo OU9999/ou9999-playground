@@ -1,10 +1,12 @@
 "use server";
 import Replicate from "replicate";
 
-export const getReplicateOutput = async (
+type ReplicateOutPut = (
   prompt: string,
   model: `${string}/${string}` | `${string}/${string}:${string}`
-) => {
+) => Promise<string | string[]>;
+
+export const getReplicateOutput: ReplicateOutPut = async (prompt, model) => {
   try {
     const replicate = new Replicate({
       auth: process.env.NEXT_PUBLIC_REPLICATE_API_TOKEN,
@@ -17,6 +19,8 @@ export const getReplicateOutput = async (
       num_outputs: 1,
       guideance_scale: 3.5,
       scheduler: "K_EULER",
+      width: 512,
+      height: 512,
     };
 
     const output = await replicate.run(model, {
