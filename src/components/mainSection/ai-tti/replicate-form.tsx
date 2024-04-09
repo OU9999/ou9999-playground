@@ -49,6 +49,8 @@ const FormSchema = z.object({
   }),
 });
 
+type FormZodType = typeof FormSchema;
+
 const ReplicateForm = ({
   submitFn,
   disable,
@@ -57,7 +59,7 @@ const ReplicateForm = ({
   error,
   errorMessage,
 }: ReplicateFormProps) => {
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm<z.infer<FormZodType>>({
     resolver: zodResolver(FormSchema),
   });
 
