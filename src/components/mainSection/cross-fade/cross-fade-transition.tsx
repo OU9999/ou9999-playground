@@ -42,6 +42,7 @@ const sanrioData = [
 const CrossFadeTransition = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [opacity, setOpacity] = useState([1, 0, 0, 0, 0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!api) {
@@ -61,6 +62,12 @@ const CrossFadeTransition = () => {
       });
 
       setOpacity(newOpacity);
+    });
+
+    api.on("select", () => {
+      console.log("select");
+      const index = api.selectedScrollSnap();
+      setCurrentIndex(index);
     });
   }, [api]);
 
@@ -99,6 +106,10 @@ const CrossFadeTransition = () => {
             ))}
           </CarouselContent>
         </Carousel>
+        <div className="absolute flex right-2 top-2 bg-black text-xs px-2 py-1 rounded-md bg-opacity-75">
+          <p className="text-slate-50">{currentIndex + 1}</p>
+          <p className="text-slate-400">&nbsp;/ {sanrioData.length}</p>
+        </div>
       </div>
     </GridBox>
   );
