@@ -65,7 +65,7 @@ const CrossFadeTransition = () => {
   }, [api]);
 
   return (
-    <GridBox className="w-full h-96 p-10">
+    <GridBox className="w-full h-96 py-10 px-0 md:px-10">
       <div className="w-full h-64 max-w-sm border rounded-md relative  bg-slate-700">
         {sanrioData.map((item, index) => (
           <div

@@ -12,7 +12,7 @@ const DetailLayout = ({
   rightSection,
 }: DetailLayoutProps) => {
   return (
-    <div className="w-dvw h-auto min-h-dvh relative">
+    <div className="w-dvw h-auto min-h-dvh mb-5 md:mb-0 relative">
       <div className="w-full flex flex-col justify-center items-center">
         <div className="w-full h-auto min-h-[400px] mt-14 bg-gradient-head flex flex-col justify-center items-center ">
           <div className="w-full h-full max-w-336 items-center content-center space-y-5 px-10">
