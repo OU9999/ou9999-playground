@@ -106,7 +106,7 @@ const CrossFadeTransition = () => {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="absolute flex right-2 top-2 bg-black text-xs px-2 py-1 rounded-md bg-opacity-75">
+        <div className="absolute flex right-2 top-2 bg-black text-xs px-2 py-1 rounded-md bg-opacity-75 z-40">
           <p className="text-slate-50">{currentIndex + 1}</p>
           <p className="text-slate-400">&nbsp;/ {sanrioData.length}</p>
         </div>
