@@ -65,7 +65,6 @@ const CrossFadeTransition = () => {
     });
 
     api.on("select", () => {
-      console.log("select");
       const index = api.selectedScrollSnap();
       setCurrentIndex(index);
     });

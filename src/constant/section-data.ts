@@ -34,7 +34,19 @@ const aiTtiSectionData: SectionData = {
   published: true,
 };
 
-const allData = [crossFadeSectionData, aiTtiSectionData];
+const valorantSectionData: SectionData = {
+  title: "Valorant Agent Contract",
+  link: "vac",
+  description: "발로란트 스타일 Carousel",
+  badge: "ui",
+  inspired: "발로란트 요원 계약 UI",
+  dependencies: ["embla-carousel-react@^8.0.0"],
+  date: 20240419,
+  image: "ai-tti",
+  published: false,
+};
+
+const allData = [crossFadeSectionData, aiTtiSectionData, valorantSectionData];
 
 const allFilteredData = allData.filter((data) => data.published);
 
