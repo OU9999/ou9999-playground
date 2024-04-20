@@ -1,125 +1,111 @@
 "use client";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import AgentButton from "./agent-button";
 
 const agentData = [
   { name: "jett", from: "#5A8E9B", to: "#21324B" },
   { name: "viper", from: "#5C9655", to: "#121B1E" },
+  { name: "astra", from: "#96558B", to: "#29114F" },
+  { name: "neon", from: "#645292", to: "#353074" },
+  { name: "omen", from: "#394B7D", to: "#1F253C" },
+  { name: "phoenix", from: "#85683E", to: "#8C4A3D" },
+  { name: "reyna", from: "#723E49", to: "#7D3A6F" },
+  { name: "sage", from: "#489587", to: "#274953" },
+  { name: "skye", from: "#609060", to: "#524435" },
+  { name: "sova", from: "#957D6B", to: "#14192A" },
+  { name: "viper", from: "#5C9655", to: "#121B1E" },
+  { name: "yoru", from: "#3F6698", to: "#181432" },
 ];
 
 const AgentSelect = () => {
-  const [api, setApi] = useState<CarouselApi>();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [opacity, setOpacity] = useState([1, 0]);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,
+    loop: true,
   });
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    api.on("select", () => {
-      const selectedIndex = api.selectedScrollSnap();
-
-      const newOpacity = agentData.map((_, i) => {
-        return i === selectedIndex ? 1 : 0;
-      });
-
-      setOpacity(newOpacity);
-    });
-  }, [api]);
 
   const onThumbClick = useCallback(
     (index: number) => {
-      if (!api || !emblaThumbsApi) return;
-      api.scrollTo(index);
+      if (!emblaThumbsApi) return;
+      emblaThumbsApi.scrollTo(index);
     },
-    [api, emblaThumbsApi]
+    [emblaThumbsApi]
   );
 
+  const onSelect = useCallback(() => {
+    if (!emblaThumbsApi) return;
+    const selectedIndex = emblaThumbsApi.selectedScrollSnap();
+
+    const newOpacity = agentData.map((_, i) => {
+      return i === selectedIndex ? 1 : 0;
+    });
+
+    setOpacity(newOpacity);
+    setSelectedIndex(emblaThumbsApi.selectedScrollSnap());
+  }, [emblaThumbsApi, setSelectedIndex]);
+
+  useEffect(() => {
+    if (!emblaThumbsApi) return;
+    onSelect();
+    emblaThumbsApi.on("select", onSelect);
+    emblaThumbsApi.on("reInit", onSelect);
+  }, [emblaThumbsApi, onSelect]);
+
   return (
-    <div className="w-full border rounded-md h-[800px] pt-20 flex justify-center items-center relative overflow-hidden">
-      {agentData.map((item, index) => (
-        <div
-          key={item.name + index}
-          className={`transition duration-500 absolute inset-0 h-full w-full`}
-          style={{
-            opacity: opacity[index],
-            background: `linear-gradient(to bottom, ${item.from}, ${item.to})`,
-          }}
-        />
-      ))}
-
-      {agentData.map((item, index) => (
-        <div
-          key={"test" + index}
-          className="w-96 h-full absolute z-20"
-          style={{
-            opacity: opacity[index],
-          }}
-        >
-          <Image
-            alt="agent"
-            src={`/imgs/valorant/stand/${item.name}.png`}
-            fill
+    <>
+      <div className="w-full border rounded-md h-[800px] pt-20 flex justify-center items-center relative overflow-hidden">
+        {agentData.map((item, index) => (
+          <div
+            key={item.name + index}
+            className={`transition duration-500 absolute inset-0 h-full w-full`}
+            style={{
+              opacity: opacity[index],
+              background: `linear-gradient(to bottom, ${item.from}, ${item.to})`,
+            }}
           />
-        </div>
-      ))}
+        ))}
 
-      <div className="absolute w-full h-32 bottom-20 z-30 px-8">
-        <div className="w-full h-full border-t-2 border-slate-800 border-opacity-60 flex justify-center py-3">
-          <Carousel
-            className="w-full max-w-sm"
-            opts={{ loop: true }}
-            setApi={setApi}
+        {agentData.map((item, index) => (
+          <div
+            key={"test" + index}
+            className="w-96 h-full absolute z-20"
+            style={{
+              opacity: opacity[index],
+            }}
           >
-            <CarouselContent>
-              {agentData.map((item, index) => (
-                <CarouselItem key={item.name + index}>
-                  {/* <div className="w-28 h-28 border-4 border-slate-100 border-opacity-60 relative">
-                    <Image
-                      alt="agent-icon"
-                      src={`/imgs/valorant/icon/${item.name}.png`}
-                      fill
+            <Image
+              alt="agent"
+              src={`/imgs/valorant/stand/${item.name}.png`}
+              fill
+            />
+          </div>
+        ))}
+
+        <div className="absolute w-full h-32 bottom-20 z-30 px-8">
+          <div className="w-full h-full border-t-2 border-slate-800 border-opacity-60 flex justify-center py-3">
+            <div className="w-full h-auto">
+              <div ref={emblaThumbsRef} className="overflow-hidden">
+                <div className="w-auto flex flex-row pl-2 space-x-2">
+                  {agentData.map((item, index) => (
+                    <AgentButton
+                      key={"agent-button" + item.name + index}
+                      img={item.name}
+                      clickFn={() => onThumbClick(index)}
+                      selected={index === selectedIndex}
                     />
-                  </div> */}
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="absolute flex bottom-[-40px]">
-              <CarouselPrevious />
-              <CarouselNext />
-            </div>
-          </Carousel>
-          <div className="embla-thumbs bg-red-500 w-full h-10">
-            <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-              <div className="embla-thumbs__container">
-                {agentData.map((_, index) => (
-                  <div
-                    key={index}
-                    className="w-10 h-10 relative"
-                    onClick={() => onThumbClick(index)}
-                  >
-                    <p>{index}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

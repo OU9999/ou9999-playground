@@ -43,7 +43,7 @@ const valorantSectionData: SectionData = {
   dependencies: ["embla-carousel-react@^8.0.0"],
   date: 20240419,
   image: "ai-tti",
-  published: false,
+  published: true,
 };
 
 const allData = [crossFadeSectionData, aiTtiSectionData, valorantSectionData];
