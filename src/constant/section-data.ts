@@ -42,7 +42,7 @@ const valorantSectionData: SectionData = {
   inspired: "발로란트 요원 계약 UI",
   dependencies: ["embla-carousel-react@^8.0.0"],
   date: 20240419,
-  image: "ai-tti",
+  image: "vac",
   published: true,
 };
 
