@@ -56,7 +56,7 @@ const AgentSelect = () => {
   return (
     <>
       <div className="w-full border rounded-md md h-[500px] md:h-[800px] pt-20 flex justify-center items-center relative overflow-hidden">
-        <div className="z-30 w-36 md:w-40 xl:w-52 absolute right-0 md:right-0 xl:right-10 top-5 md:top-5 xl:top-20 flex flex-col">
+        <div className="z-30 w-36 md:w-40 xl:w-52 absolute right-5 md:right-5 xl:right-10 top-5 md:top-5 xl:top-14 flex flex-col items-end">
           <p className="text-xs md:text-sm">
             {agentData[selectedIndex].role.toUpperCase()}
           </p>

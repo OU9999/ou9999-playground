@@ -26,4 +26,9 @@ export const agentData: Agent[] = [
   { name: "chamber", from: "#958551", to: "#2C2521", role: "sentinel" },
   { name: "brimstone", from: "#936337", to: "#2A1A1F", role: "controller" },
   { name: "breach", from: "#94652E", to: "#3C2822", role: "initiator" },
+  { name: "gekko", from: "#7F9E44", to: "#4E2F3A", role: "initiator" },
+  { name: "harbor", from: "#887D69", to: "#153D44", role: "controller" },
+  { name: "deadlock", from: "#535977", to: "#242C51", role: "sentinel" },
+  { name: "iso", from: "#75609C", to: "#201758", role: "duelist" },
+  { name: "clove", from: "#945E70", to: "#633273", role: "controller" },
 ];
