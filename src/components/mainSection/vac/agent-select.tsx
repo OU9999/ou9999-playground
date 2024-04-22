@@ -4,21 +4,37 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AgentButton from "./agent-button";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { agentData } from "@/constant/agent-data";
 
-const agentData = [
-  { name: "jett", from: "#5A8E9B", to: "#21324B" },
-  { name: "viper", from: "#5C9655", to: "#121B1E" },
-  { name: "astra", from: "#96558B", to: "#29114F" },
-  { name: "neon", from: "#6B569D", to: "#1E1D43" },
-  { name: "omen", from: "#394B7D", to: "#1F253C" },
-  { name: "phoenix", from: "#85683E", to: "#8C4A3D" },
-  { name: "reyna", from: "#7F434F", to: "#2C1839" },
-  { name: "sage", from: "#489587", to: "#274953" },
-  { name: "skye", from: "#609060", to: "#524435" },
-  { name: "sova", from: "#957D6B", to: "#14192A" },
-  { name: "viper", from: "#5C9655", to: "#121B1E" },
-  { name: "yoru", from: "#3F6698", to: "#181432" },
-];
+interface CarouselButtonProps {
+  clickFn: () => void;
+  variant: "prev" | "next";
+}
+
+const CarouselButton = ({ clickFn, variant }: CarouselButtonProps) => {
+  return (
+    <Button
+      size={"icon"}
+      variant={"outline"}
+      className="bg-slate-300 bg-opacity-10 text-slate-50 rounded-none border-none"
+      onClick={clickFn}
+    >
+      {variant === "prev" ? (
+        <>
+          <ChevronLeft className="w-5 h-5" />
+          <span className="sr-only">Prev slide</span>
+        </>
+      ) : (
+        <>
+          <ChevronRight className="w-5 h-5" />
+          <span className="sr-only">Next slide</span>
+        </>
+      )}
+    </Button>
+  );
+};
 
 const AgentSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,6 +64,14 @@ const AgentSelect = () => {
     setOpacity(newOpacity);
     setSelectedIndex(emblaThumbsApi.selectedScrollSnap());
   }, [emblaThumbsApi, setSelectedIndex]);
+
+  const scrollPrev = useCallback(() => {
+    emblaThumbsApi?.scrollPrev();
+  }, [emblaThumbsApi]);
+
+  const scrollNext = useCallback(() => {
+    emblaThumbsApi?.scrollNext();
+  }, [emblaThumbsApi]);
 
   useEffect(() => {
     if (!emblaThumbsApi) return;
@@ -101,6 +125,17 @@ const AgentSelect = () => {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="flex w-full mt-5 justify-center items-center">
+            <div className="w-44 flex justify-between items-center space-x-2 backdrop-blur-md">
+              <CarouselButton clickFn={scrollPrev} variant="prev" />
+
+              <p className="relative top-[-2px] font-bold">
+                {selectedIndex + 1} / {agentData.length}
+              </p>
+
+              <CarouselButton clickFn={scrollNext} variant="next" />
             </div>
           </div>
         </div>
