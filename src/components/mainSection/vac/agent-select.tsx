@@ -55,10 +55,12 @@ const AgentSelect = () => {
 
   return (
     <>
-      <div className="w-full border rounded-md h-[800px] pt-20 flex justify-center items-center relative overflow-hidden">
-        <div className="z-30 w-52 absolute right-10 top-20 flex flex-col">
-          <p>{agentData[selectedIndex].role.toUpperCase()}</p>
-          <p className="text-4xl font-bold text-[#EAEFB0]">
+      <div className="w-full border rounded-md md h-[500px] md:h-[800px] pt-20 flex justify-center items-center relative overflow-hidden">
+        <div className="z-30 w-36 md:w-40 xl:w-52 absolute right-0 md:right-0 xl:right-10 top-5 md:top-5 xl:top-20 flex flex-col">
+          <p className="text-xs md:text-sm">
+            {agentData[selectedIndex].role.toUpperCase()}
+          </p>
+          <p className="text-xl md:text-2xl xl:text-4xl font-bold text-[#EAEFB0]">
             {agentData[selectedIndex].name.toUpperCase()}
           </p>
         </div>
@@ -77,7 +79,7 @@ const AgentSelect = () => {
         {agentData.map((item, index) => (
           <div
             key={"test" + index}
-            className="w-96 h-full absolute z-20"
+            className="w-60 md:w-96 h-96 md:h-full absolute z-20"
             style={{
               opacity: opacity[index],
             }}
@@ -90,7 +92,7 @@ const AgentSelect = () => {
           </div>
         ))}
 
-        <div className="absolute w-full h-32 bottom-20 z-30 px-8">
+        <div className="absolute w-full h-32 bottom-0 md:bottom-20 z-30 px-3 md:px-8">
           <div className="w-full h-full border-t-4 border-slate-700 border-opacity-60 flex justify-center py-3">
             <div className="w-full h-auto">
               <div ref={emblaThumbsRef} className="overflow-hidden">
@@ -107,7 +109,7 @@ const AgentSelect = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full mt-5 justify-center items-center">
+          <div className="hidden md:flex w-full mt-5 justify-center items-center">
             <div className="w-44 flex justify-between items-center space-x-2 backdrop-blur-md">
               <CarouselButton clickFn={scrollPrev} variant="prev" />
 
