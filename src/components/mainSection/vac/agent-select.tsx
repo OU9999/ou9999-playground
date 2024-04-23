@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AgentButton from "./agent-button";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { agentData } from "@/constant/agent-data";
 import CarouselButton from "./vac-carousel-button";
+import ImageWithPlaceholder from "@/components/common/image-with-placeholder";
 
 const AgentSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -84,9 +82,9 @@ const AgentSelect = () => {
               opacity: opacity[index],
             }}
           >
-            <Image
+            <ImageWithPlaceholder
               alt="agent"
-              src={`/imgs/valorant/stand/${item.name}.png`}
+              src={`/imgs/valorant-stand/${item.name}.png`}
               fill
             />
           </div>

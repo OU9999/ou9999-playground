@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageWithPlaceholder from "@/components/common/image-with-placeholder";
 
 interface AgentButtonProps {
   img: string;
@@ -14,7 +14,11 @@ const AgentButton = ({ img, clickFn, selected }: AgentButtonProps) => {
         selected ? "border-slate-100" : "border-slate-700"
       }`}
     >
-      <Image alt="agent-icon" src={`/imgs/valorant/icon/${img}.png`} fill />
+      <ImageWithPlaceholder
+        alt="agent-icon"
+        src={`/imgs/valorant-icon/${img}.png`}
+        fill
+      />
     </div>
   );
 };
