@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import AgentButton from "./agent-button";
 import { agentData } from "@/constant/agent-data";
 import CarouselButton from "./vac-carousel-button";
-import ImageWithPlaceholder from "@/components/common/image-with-placeholder";
+import Image from "next/image";
 
 const AgentSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -82,7 +82,7 @@ const AgentSelect = () => {
               opacity: opacity[index],
             }}
           >
-            <ImageWithPlaceholder
+            <Image
               alt="agent"
               src={`/imgs/valorant-stand/${item.name}.png`}
               fill

@@ -64,7 +64,7 @@ const getDirNames = () => {
   const inputDir = path.join(process.cwd(), "public", "imgs");
   const files = readdirSync(inputDir);
 
-  const blacklist = ["header", "openGraph"];
+  const blacklist = ["header", "openGraph", "valorant-icon", "valorant-stand"];
 
   const dirNames = files.filter((file) => {
     const filePath = path.join(inputDir, file);

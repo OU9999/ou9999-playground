@@ -1,7 +1,7 @@
 import { getBadgeString } from "@/util/badge-util";
 import { Badge } from "./badge";
-import Image from "next/image";
 import Link from "next/link";
+import ImageWithPlaceholder from "../common/image-with-placeholder";
 
 interface MainCardProps {
   title: string;
@@ -19,7 +19,7 @@ const MainCard = ({ title, badge, link, image }: MainCardProps) => {
         <div className="h-5/6 relative flex justify-center p-10">
           <div className="w-56 min-w-56 h-full relative rounded-md overflow-hidden">
             {image && (
-              <Image
+              <ImageWithPlaceholder
                 alt="card-image"
                 fill
                 src={`/imgs/thumbnail/${image}.png`}
