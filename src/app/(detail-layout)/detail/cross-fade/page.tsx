@@ -1,3 +1,4 @@
+import CrossFadeProgress from "@/components/mainSection/cross-fade/cross-fade-progress";
 import CrossFadeTransition from "@/components/mainSection/cross-fade/cross-fade-transition";
 import { getMetaDataFromSectionData } from "@/util/meta-data-util";
 import { getSectionDataByLink } from "@/util/section-data-util";
@@ -25,6 +26,7 @@ const CrossFadeDetailPage = () => {
   return (
     <div className="w-full h-auto min-h-dvh">
       <CrossFadeTransition />
+      <CrossFadeProgress />
     </div>
   );
 };
