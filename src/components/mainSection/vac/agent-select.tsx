@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const AgentSelect = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [opacity, setOpacity] = useState([1, 0]);
+  const [opacity, setOpacity] = useState([1]);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,

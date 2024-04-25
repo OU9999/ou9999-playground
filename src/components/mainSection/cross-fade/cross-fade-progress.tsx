@@ -122,8 +122,11 @@ const CrossFadeProgress = () => {
                   <CarouselPrevious />
                   <CarouselNext />
                 </Carousel>
-                <div className="py-2 text-center text-sm text-muted-foreground">
-                  Slide {current} of {count}
+                <div className="py-2 text-center text-sm text-muted-foreground flex">
+                  <p className=" hidden md:inline-block">Slide&nbsp;</p>
+                  <p>
+                    {current} of {count}
+                  </p>
                 </div>
               </div>
             </GridBox>
