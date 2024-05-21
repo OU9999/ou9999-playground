@@ -46,7 +46,24 @@ const valorantSectionData: SectionData = {
   published: true,
 };
 
-const allData = [crossFadeSectionData, aiTtiSectionData, valorantSectionData];
+const ocrSectionData: SectionData = {
+  title: "Text OCR",
+  link: "ocr",
+  description: "신분증 OCR + UI",
+  badge: "engineering",
+  inspired: "토스 신분증 OCR",
+  dependencies: ["test"],
+  date: 20240521,
+  image: "vac",
+  published: true,
+};
+
+const allData = [
+  crossFadeSectionData,
+  aiTtiSectionData,
+  valorantSectionData,
+  ocrSectionData,
+];
 
 const allFilteredData = allData.filter((data) => data.published);
 
