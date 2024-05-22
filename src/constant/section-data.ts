@@ -47,7 +47,7 @@ const valorantSectionData: SectionData = {
 };
 
 const ocrSectionData: SectionData = {
-  title: "Text OCR",
+  title: "신분증 OCR",
   link: "ocr",
   description: "신분증 OCR + UI",
   badge: "engineering",
@@ -55,7 +55,7 @@ const ocrSectionData: SectionData = {
   dependencies: ["test"],
   date: 20240521,
   image: "vac",
-  published: true,
+  published: false,
 };
 
 const allData = [
