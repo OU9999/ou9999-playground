@@ -58,7 +58,7 @@ const ocrSectionData: SectionData = {
   published: false,
 };
 
-const allData = [
+export const allData = [
   crossFadeSectionData,
   aiTtiSectionData,
   valorantSectionData,
