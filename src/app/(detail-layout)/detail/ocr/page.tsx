@@ -1,4 +1,5 @@
-import AgentSelect from "@/components/mainSection/vac/agent-select";
+import OCRBox from "@/components/mainSection/ocr/ocr-box";
+
 import { getMetaDataFromSectionData } from "@/util/meta-data-util";
 import { getSectionDataByLink } from "@/util/section-data-util";
 
@@ -22,7 +23,11 @@ export const generateMetadata = () => {
 };
 
 const OCRDetailPage = () => {
-  return <div className="w-full h-auto min-h-dvh">ocr</div>;
+  return (
+    <div className="w-full h-auto min-h-dvh">
+      <OCRBox />
+    </div>
+  );
 };
 
 export default OCRDetailPage;
