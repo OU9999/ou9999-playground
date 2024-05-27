@@ -2,62 +2,45 @@
 import GridBox from "@/components/ui/grid-box";
 import OCRForm from "./ocr-form";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OCRResult from "./ocr-result";
-import { ClovaOutput } from "@/action/ocr-action";
-import { isOverThirtyMinutes } from "@/util/date-util";
+import { ClovaOutput, callClovaOCR } from "@/action/ocr-action";
+import { useCertification } from "@/hooks/useCertification";
+import { getUrlFromSelect } from "@/util/ocr-util";
+
+export interface FormCustomData {
+  select: string;
+}
 
 const OCRBox = () => {
   const [imgSrc, setImgSrc] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clovaData, setClovaData] = useState<ClovaOutput | null>(null);
-  const [isCertification, setIsCertification] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(0);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const {
+    isCertification,
+    setCertificationSuccess,
+    setCount,
+    isError,
+    errorMessage,
+  } = useCertification();
   const MAX_COUNT = 10;
 
-  const setCertificationSuccess = (): void => {
-    setIsCertification(true);
-    sessionStorage.setItem("certification", String(true));
-  };
+  const submitFn = async (formData: FormCustomData) => {
+    setIsLoading(true);
+    const url = getUrlFromSelect(formData.select);
+    const data = await callClovaOCR(url);
 
-  const setErrorAndMessage = (errorMessage: string) => {
-    setIsError(true);
-    setErrorMessage(errorMessage);
-  };
+    if (typeof data !== "string") setClovaData(data);
 
-  //storage
-  useEffect(() => {
-    if (count < MAX_COUNT) {
-      return;
+    const currentCount = Number(localStorage.getItem("count") || 0) + 1;
+    localStorage.setItem("count", String(currentCount));
+    setCount(currentCount);
+
+    if (currentCount >= 10) {
+      localStorage.setItem("date", String(Date.now()));
     }
-
-    setErrorAndMessage("너무 많은 요청을 보냈습니다. 나중에 시도해 주세요.");
-  }, [count]);
-
-  useEffect(() => {
-    setIsCertification(
-      Boolean(sessionStorage.getItem("certification")) || false
-    );
-    setCount(Number(localStorage.getItem("count") || 0));
-
-    const lastRequestTime = localStorage.getItem("date");
-    if (lastRequestTime) {
-      const overThirtyMinute = isOverThirtyMinutes(lastRequestTime);
-
-      if (overThirtyMinute) {
-        localStorage.removeItem("date");
-        localStorage.removeItem("count");
-        setIsError(false);
-        setErrorMessage(null);
-        setCount(0);
-        return;
-      }
-
-      setErrorAndMessage("너무 많은 요청을 보냈습니다. 나중에 시도해 주세요.");
-    }
-  }, []);
+    setIsLoading(false);
+  };
 
   return (
     <GridBox className="p-10 space-y-20 flex flex-col">
@@ -65,9 +48,7 @@ const OCRBox = () => {
         <div className="w-96">
           <OCRForm
             setImgSrc={setImgSrc}
-            setIsLoading={setIsLoading}
-            setClovaData={setClovaData}
-            setCount={setCount}
+            submitFn={submitFn}
             isCertification={isCertification}
             isDisable={
               isLoading ||

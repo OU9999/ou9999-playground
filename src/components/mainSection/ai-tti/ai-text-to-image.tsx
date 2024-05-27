@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getReplicateOutput } from "@/action/replicate-action";
 import {
   SelectFormData,
@@ -10,8 +10,8 @@ import {
 import Image from "next/image";
 import LoadingSpinner from "../../common/loading-spinner";
 import GridBox from "@/components/ui/grid-box";
-import { isOverThirtyMinutes } from "@/util/date-util";
 import ReplicateForm from "./replicate-form";
+import { useCertification } from "@/hooks/useCertification";
 
 interface FormCustomData {
   prompt: string;
@@ -21,23 +21,18 @@ interface FormCustomData {
 const AiTextToImage = () => {
   //state
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [isCertification, setIsCertification] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [imgSrc, setImgSrc] = useState<string[] | null>(null);
-  const [count, setCount] = useState<number>(0);
+  const {
+    isCertification,
+    setCertificationSuccess,
+    setCount,
+    isError,
+    setIsError,
+    errorMessage,
+    setErrorMessage,
+    setErrorAndMessage,
+  } = useCertification();
   const MAX_COUNT = 10;
-
-  //fn
-  const setErrorAndMessage = (errorMessage: string) => {
-    setIsError(true);
-    setErrorMessage(errorMessage);
-  };
-
-  const setCertificationSuccess = () => {
-    setIsCertification(true);
-    sessionStorage.setItem("certification", String(true));
-  };
 
   const getReplicateData = async (formData: FormCustomData) => {
     setIsError(false);
@@ -75,38 +70,6 @@ const AiTextToImage = () => {
       localStorage.setItem("date", String(Date.now()));
     }
   };
-
-  //storage
-  useEffect(() => {
-    if (count < MAX_COUNT) {
-      return;
-    }
-
-    setErrorAndMessage("너무 많은 요청을 보냈습니다. 나중에 시도해 주세요.");
-  }, [count]);
-
-  useEffect(() => {
-    setIsCertification(
-      Boolean(sessionStorage.getItem("certification")) || false
-    );
-    setCount(Number(localStorage.getItem("count") || 0));
-
-    const lastRequestTime = localStorage.getItem("date");
-    if (lastRequestTime) {
-      const overThirtyMinute = isOverThirtyMinutes(lastRequestTime);
-
-      if (overThirtyMinute) {
-        localStorage.removeItem("date");
-        localStorage.removeItem("count");
-        setIsError(false);
-        setErrorMessage(null);
-        setCount(0);
-        return;
-      }
-
-      setErrorAndMessage("너무 많은 요청을 보냈습니다. 나중에 시도해 주세요.");
-    }
-  }, []);
 
   return (
     <GridBox className="flex flex-col xl:flex-row space-y-10 xl:space-y-0 space-x-0 xl:space-x-5 h-auto justify-center items-center content-center p-10 ">

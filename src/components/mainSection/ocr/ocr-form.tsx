@@ -22,6 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getUrlFromSelect } from "@/util/ocr-util";
 import { Dispatch, SetStateAction } from "react";
 import ReCaptcha from "@/components/common/re-captcha";
+import { FormCustomData } from "./ocr-box";
 
 const FormSchema = z.object({
   select: z.string({
@@ -31,15 +32,9 @@ const FormSchema = z.object({
 
 type FormZodType = typeof FormSchema;
 
-interface FormCustomData {
-  select: string;
-}
-
 interface OCRFormProps {
   setImgSrc: Dispatch<SetStateAction<string | null>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  setClovaData: Dispatch<SetStateAction<null | ClovaOutput>>;
-  setCount: Dispatch<SetStateAction<number>>;
+  submitFn: (formData: FormCustomData) => Promise<void>;
   isCertification: boolean;
   isDisable: boolean;
   certificationSuccess: () => void;
@@ -49,9 +44,7 @@ interface OCRFormProps {
 
 const OCRForm = ({
   setImgSrc,
-  setIsLoading,
-  setClovaData,
-  setCount,
+  submitFn,
   isCertification,
   isDisable,
   certificationSuccess,
@@ -61,24 +54,6 @@ const OCRForm = ({
   const form = useForm<z.infer<FormZodType>>({
     resolver: zodResolver(FormSchema),
   });
-
-  const submitFn = async (formData: FormCustomData) => {
-    setIsLoading(true);
-    const url = getUrlFromSelect(formData.select);
-    const data = await callClovaOCR(url);
-
-    if (typeof data !== "string") setClovaData(data);
-
-    const currentCount = Number(localStorage.getItem("count") || 0) + 1;
-    localStorage.setItem("count", String(currentCount));
-    setCount(currentCount);
-
-    if (currentCount >= 10) {
-      localStorage.setItem("date", String(Date.now()));
-    }
-
-    setIsLoading(false);
-  };
 
   const onSubmit = form.handleSubmit(submitFn);
 
