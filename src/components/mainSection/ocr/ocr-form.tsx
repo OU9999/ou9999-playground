@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,6 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { getUrlFromSelect } from "@/util/ocr-util";
+import { Dispatch, SetStateAction } from "react";
 
 const FormSchema = z.object({
   select: z.string({
@@ -29,13 +30,22 @@ const FormSchema = z.object({
 
 type FormZodType = typeof FormSchema;
 
-const OCRForm = () => {
+interface FormCustomData {
+  select: string;
+}
+
+interface OCRFormProps {
+  setImgSrc: Dispatch<SetStateAction<string | null>>;
+}
+
+const OCRForm = ({ setImgSrc }: OCRFormProps) => {
   const form = useForm<z.infer<FormZodType>>({
     resolver: zodResolver(FormSchema),
   });
 
-  const submitFn = async () => {
-    const data = await callClovaOCR("url");
+  const submitFn = async (formData: FormCustomData) => {
+    const url = getUrlFromSelect(formData.select);
+    const data = await callClovaOCR(url);
     console.log("client data", data);
   };
 
@@ -51,7 +61,14 @@ const OCRForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>OCR 템플릿</FormLabel>
-                <Select {...field} onValueChange={field.onChange}>
+                <Select
+                  {...field}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    const url = getUrlFromSelect(value);
+                    setImgSrc(url);
+                  }}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="OCR 템플릿을 골라주세요." />
