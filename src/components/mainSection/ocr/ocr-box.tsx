@@ -45,7 +45,7 @@ const OCRBox = () => {
   return (
     <GridBox className="p-10 space-y-20 flex flex-col">
       <div className="flex flex-col xl:flex-row justify-center items-center w-full space-y-5 xl:space-y-0 space-x-0 xl:space-x-10">
-        <div className="w-96">
+        <div className="w-full max-w-96">
           <OCRForm
             setImgSrc={setImgSrc}
             submitFn={submitFn}
@@ -61,7 +61,7 @@ const OCRBox = () => {
           />
         </div>
         <div
-          className={`relative w-full h-44 xl:w-96 xl:h-60 min-w-72 max-w-96 min-h-44 xl:min-w-96 xl:min-h-60 rounded-lg overflow-hidden flex justify-center items-center border bg-[#020817]`}
+          className={`relative w-full h-44 xl:w-96 xl:h-60 max-w-96 min-h-44 xl:min-w-96 xl:min-h-60 rounded-lg overflow-hidden flex justify-center items-center border bg-[#020817]`}
         >
           {imgSrc ? <Image alt="ocr-image" src={imgSrc} fill /> : <p>이미지</p>}
         </div>
