@@ -1,9 +1,39 @@
 "use server";
 import axios from "axios";
 
-type ReplicateOutPut = (url: string) => Promise<object | string>;
+interface FieldVertice {
+  x: number;
+  y: number;
+}
 
-export const callClovaOCR: ReplicateOutPut = async (url) => {
+interface ClovaImageField {
+  valueType: string;
+  inferText: string;
+  inferConfidence: number;
+  boundingPoly: {
+    vertices: FieldVertice[];
+  };
+}
+
+interface ClovaImages {
+  uid: string;
+  name: string;
+  inferResult: string;
+  message: string;
+  validationResult: object[];
+  fields: ClovaImageField[];
+}
+
+interface ClovaOutput {
+  version: string;
+  requestId: string;
+  timestamp: number;
+  images: ClovaImages[];
+}
+
+type ClovaOCR = (url: string) => Promise<ClovaOutput | string>;
+
+export const callClovaOCR: ClovaOCR = async (url) => {
   const apiToken = process.env.NEXT_PUBLIC_OCR_TOKEN;
   const apiUrl = process.env.NEXT_PUBLIC_OCR_API;
   const requestBody = {
@@ -29,7 +59,6 @@ export const callClovaOCR: ReplicateOutPut = async (url) => {
         "X-OCR-SECRET": apiToken,
       },
     });
-    console.log(response.data);
 
     return response.data;
   } catch (err) {
