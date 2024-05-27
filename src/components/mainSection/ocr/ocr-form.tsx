@@ -21,6 +21,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getUrlFromSelect } from "@/util/ocr-util";
 import { Dispatch, SetStateAction } from "react";
+import ReCaptcha from "@/components/common/re-captcha";
 
 const FormSchema = z.object({
   select: z.string({
@@ -38,14 +39,24 @@ interface OCRFormProps {
   setImgSrc: Dispatch<SetStateAction<string | null>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setClovaData: Dispatch<SetStateAction<null | ClovaOutput>>;
-  isLoading: boolean;
+  setCount: Dispatch<SetStateAction<number>>;
+  isCertification: boolean;
+  isDisable: boolean;
+  certificationSuccess: () => void;
+  error: boolean;
+  errorMessage: string | null;
 }
 
 const OCRForm = ({
   setImgSrc,
   setIsLoading,
   setClovaData,
-  isLoading,
+  setCount,
+  isCertification,
+  isDisable,
+  certificationSuccess,
+  error,
+  errorMessage,
 }: OCRFormProps) => {
   const form = useForm<z.infer<FormZodType>>({
     resolver: zodResolver(FormSchema),
@@ -57,8 +68,16 @@ const OCRForm = ({
     const data = await callClovaOCR(url);
 
     if (typeof data !== "string") setClovaData(data);
+
+    const currentCount = Number(localStorage.getItem("count") || 0) + 1;
+    localStorage.setItem("count", String(currentCount));
+    setCount(currentCount);
+
+    if (currentCount >= 10) {
+      localStorage.setItem("date", String(Date.now()));
+    }
+
     setIsLoading(false);
-    console.log("client data", data); // 테스트 끝나면 지울것
   };
 
   const onSubmit = form.handleSubmit(submitFn);
@@ -104,13 +123,25 @@ const OCRForm = ({
               </FormItem>
             )}
           />
-          <Button
-            className="w-full md:w-auto"
-            type="submit"
-            disabled={isLoading}
-          >
-            실행
-          </Button>
+          <div className="w-full flex flex-col space-x-0 xl:space-x-3 space-y-3 xl:space-y-0 xl:flex-row items-center">
+            <Button
+              disabled={isDisable}
+              type="submit"
+              className="w-full xl:w-auto"
+            >
+              실행
+            </Button>
+            {error && (
+              <p className="text-red-500 text-xs md:text-sm w-full text-center">
+                {errorMessage}
+              </p>
+            )}
+          </div>
+          {isCertification ? (
+            <div className="h-[75px] relative hidden xl:flex" />
+          ) : (
+            <ReCaptcha onChange={certificationSuccess} />
+          )}
         </form>
       </Form>
     </>

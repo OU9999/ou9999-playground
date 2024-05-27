@@ -8,7 +8,11 @@ interface ReCaptchaProps {
 }
 
 const ReCaptcha = ({ onChange }: ReCaptchaProps) => {
-  return <ReCAPTCHA theme="dark" sitekey={sitekey} onChange={onChange} />;
+  return (
+    <div className="h-[75px] min-h-[75px] max-h-[75px]">
+      <ReCAPTCHA theme="dark" sitekey={sitekey} onChange={onChange} />
+    </div>
+  );
 };
 
 export default ReCaptcha;
