@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { callClovaOCR } from "@/action/ocr-action";
+import { ClovaOutput, callClovaOCR } from "@/action/ocr-action";
 import {
   Select,
   SelectContent,
@@ -36,17 +36,29 @@ interface FormCustomData {
 
 interface OCRFormProps {
   setImgSrc: Dispatch<SetStateAction<string | null>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setClovaData: Dispatch<SetStateAction<null | ClovaOutput>>;
+  isLoading: boolean;
 }
 
-const OCRForm = ({ setImgSrc }: OCRFormProps) => {
+const OCRForm = ({
+  setImgSrc,
+  setIsLoading,
+  setClovaData,
+  isLoading,
+}: OCRFormProps) => {
   const form = useForm<z.infer<FormZodType>>({
     resolver: zodResolver(FormSchema),
   });
 
   const submitFn = async (formData: FormCustomData) => {
+    setIsLoading(true);
     const url = getUrlFromSelect(formData.select);
     const data = await callClovaOCR(url);
-    console.log("client data", data);
+
+    if (typeof data !== "string") setClovaData(data);
+    setIsLoading(false);
+    console.log("client data", data); // 테스트 끝나면 지울것
   };
 
   const onSubmit = form.handleSubmit(submitFn);
@@ -89,7 +101,9 @@ const OCRForm = ({ setImgSrc }: OCRFormProps) => {
               </FormItem>
             )}
           />
-          <Button type="submit">실행</Button>
+          <Button type="submit" disabled={isLoading}>
+            실행
+          </Button>
         </form>
       </Form>
     </>

@@ -24,7 +24,7 @@ interface ClovaImages {
   fields: ClovaImageField[];
 }
 
-interface ClovaOutput {
+export interface ClovaOutput {
   version: string;
   requestId: string;
   timestamp: number;
