@@ -13,7 +13,7 @@ const OCRBox = () => {
 
   return (
     <GridBox className="p-10 space-y-10 flex flex-col">
-      <div className="flex flex-col md:flex-row justify-center items-center w-full space-x-10">
+      <div className="flex flex-col lg:flex-row justify-center items-center w-full space-y-5 lg:space-y-0 space-x-0 lg:space-x-10">
         <OCRForm
           setImgSrc={setImgSrc}
           setIsLoading={setIsLoading}

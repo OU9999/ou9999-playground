@@ -66,7 +66,10 @@ const OCRForm = ({
   return (
     <>
       <Form {...form}>
-        <form onSubmit={onSubmit} className="w-full relative space-y-8">
+        <form
+          onSubmit={onSubmit}
+          className="w-full relative space-y-5 md:space-y-8"
+        >
           <FormField
             control={form.control}
             name="select"
@@ -101,7 +104,11 @@ const OCRForm = ({
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isLoading}>
+          <Button
+            className="w-full md:w-auto"
+            type="submit"
+            disabled={isLoading}
+          >
             실행
           </Button>
         </form>

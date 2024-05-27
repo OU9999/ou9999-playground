@@ -16,7 +16,7 @@ const LabelText = ({ label, text }: LabelTextProps) => {
   return (
     <div className="flex flex-col space-y-1">
       <p>{label}</p>
-      <div className="w-full flex items-center bg-[#020817] border rounded-md p-2 min-h-12">
+      <div className="w-full flex items-center bg-[#020817] border rounded-md p-2 h-12 min-h-12">
         {extractName(text!)}
       </div>
     </div>
