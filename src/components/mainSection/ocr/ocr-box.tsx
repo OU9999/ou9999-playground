@@ -43,7 +43,7 @@ const OCRBox = () => {
   };
 
   return (
-    <GridBox className="p-10 space-y-20 flex flex-col">
+    <GridBox className="p-5 md:p-10 space-y-20 flex flex-col">
       <div className="flex flex-col xl:flex-row justify-center items-center w-full space-y-5 xl:space-y-0 space-x-0 xl:space-x-10">
         <div className="w-full max-w-96">
           <OCRForm
