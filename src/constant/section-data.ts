@@ -54,7 +54,7 @@ const ocrSectionData: SectionData = {
   inspired: "토스 신분증 OCR",
   dependencies: ["test"],
   date: 20240521,
-  image: "vac",
+  image: "ocr",
   published: true,
 };
 
