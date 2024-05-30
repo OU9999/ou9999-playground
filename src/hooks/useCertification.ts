@@ -2,12 +2,15 @@
 import { useState, useEffect } from "react";
 import { isOverThirtyMinutes } from "@/util/date-util";
 
-export const useCertification = () => {
+interface useCertificationProps {
+  maxCount: number;
+}
+
+export const useCertification = ({ maxCount }: useCertificationProps) => {
   const [isCertification, setIsCertification] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const MAX_COUNT = 10;
 
   const setCertificationSuccess = (): void => {
     setIsCertification(true);
@@ -20,9 +23,11 @@ export const useCertification = () => {
   };
 
   useEffect(() => {
-    if (count >= MAX_COUNT) {
+    if (count >= maxCount) {
       setErrorAndMessage("너무 많은 요청을 보냈습니다. 나중에 시도해 주세요.");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   useEffect(() => {

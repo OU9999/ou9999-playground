@@ -20,6 +20,7 @@ interface FormCustomData {
 
 const AiTextToImage = () => {
   //state
+  const MAX_COUNT = 10;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string[] | null>(null);
   const {
@@ -31,8 +32,7 @@ const AiTextToImage = () => {
     errorMessage,
     setErrorMessage,
     setErrorAndMessage,
-  } = useCertification();
-  const MAX_COUNT = 10;
+  } = useCertification({ maxCount: MAX_COUNT });
 
   const getReplicateData = async (formData: FormCustomData) => {
     setIsError(false);

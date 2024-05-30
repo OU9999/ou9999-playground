@@ -13,6 +13,7 @@ export interface FormCustomData {
 }
 
 const OCRBox = () => {
+  const MAX_COUNT = 10;
   const [imgSrc, setImgSrc] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clovaData, setClovaData] = useState<ClovaOutput | null>(null);
@@ -22,13 +23,13 @@ const OCRBox = () => {
     setCount,
     isError,
     errorMessage,
-  } = useCertification();
-  const MAX_COUNT = 10;
+  } = useCertification({ maxCount: MAX_COUNT });
 
   const submitFn = async (formData: FormCustomData) => {
     setIsLoading(true);
     const url = getUrlFromSelect(formData.select);
     const data = await callClovaOCR(url);
+    console.log(data);
 
     if (typeof data !== "string") setClovaData(data);
 
@@ -36,7 +37,7 @@ const OCRBox = () => {
     localStorage.setItem("count", String(currentCount));
     setCount(currentCount);
 
-    if (currentCount >= 10) {
+    if (currentCount >= MAX_COUNT) {
       localStorage.setItem("date", String(Date.now()));
     }
     setIsLoading(false);
