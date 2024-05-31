@@ -1,4 +1,9 @@
 "use server";
+import {
+  ClovaOCRData,
+  extractDataFromSelect,
+  getUrlFromSelect,
+} from "@/util/ocr-util";
 import axios from "axios";
 
 interface FieldVertice {
@@ -6,7 +11,7 @@ interface FieldVertice {
   y: number;
 }
 
-interface ClovaImageField {
+export interface ClovaImageField {
   valueType: string;
   inferText: string;
   inferConfidence: number;
@@ -31,9 +36,10 @@ export interface ClovaOutput {
   images: ClovaImages[];
 }
 
-type ClovaOCR = (url: string) => Promise<ClovaOutput | string>;
+type ClovaOCR = (select: string) => Promise<ClovaOCRData | string | null>;
 
-export const callClovaOCR: ClovaOCR = async (url) => {
+export const callClovaOCR: ClovaOCR = async (select) => {
+  const url = getUrlFromSelect(select);
   const apiToken = process.env.NEXT_PUBLIC_OCR_TOKEN;
   const apiUrl = process.env.NEXT_PUBLIC_OCR_API;
   const requestBody = {
@@ -60,7 +66,10 @@ export const callClovaOCR: ClovaOCR = async (url) => {
       },
     });
 
-    return response.data;
+    const clovaOutput: ClovaOutput = response.data;
+    const data = extractDataFromSelect(select, clovaOutput);
+
+    return data;
   } catch (err) {
     return String(err);
   }
