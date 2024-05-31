@@ -1,4 +1,4 @@
-import { ClovaOutput } from "@/action/ocr-action";
+import { ClovaOCRData } from "@/util/ocr-util";
 
 interface LabelTextProps {
   label?: string | null;
@@ -24,19 +24,22 @@ const LabelText = ({ label, text }: LabelTextProps) => {
 };
 
 interface OCRResultProps {
-  clovaData?: ClovaOutput | null;
+  clovaData?: ClovaOCRData | null;
 }
 
 const OCRResult = ({ clovaData }: OCRResultProps) => {
-  const name = clovaData && clovaData.images[0].fields[1].inferText;
-  const socialNumber = clovaData && clovaData.images[0].fields[2].inferText;
-
   return (
     <div className="w-full flex flex-col space-y-5">
       <h1 className="text-3xl mb-5">결과</h1>
 
-      <LabelText label={"이름"} text={name} />
-      <LabelText label={"주민등록번호"} text={socialNumber} />
+      {clovaData &&
+        clovaData.fields.map((field) => (
+          <LabelText
+            key={"LABEL TEXT" + field.title}
+            label={field.title}
+            text={field.text}
+          />
+        ))}
     </div>
   );
 };

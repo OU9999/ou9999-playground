@@ -85,9 +85,7 @@ const OCRForm = ({
                   </FormControl>
                   <SelectContent>
                     <SelectItem value="id">신분증</SelectItem>
-                    <SelectItem value="card" disabled>
-                      신용 카드(준비중)
-                    </SelectItem>
+                    <SelectItem value="card">신용 카드</SelectItem>
                     <SelectItem value="driver" disabled>
                       운전면허증(준비중)
                     </SelectItem>
@@ -113,7 +111,7 @@ const OCRForm = ({
             )}
           </div>
           {isCertification ? (
-            <div className="h-[75px] relative hidden xl:flex" />
+            <div className="h-[75px] min-h-[75px] relative hidden xl:flex" />
           ) : (
             <ReCaptcha onChange={certificationSuccess} />
           )}
