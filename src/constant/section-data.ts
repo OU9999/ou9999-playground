@@ -52,7 +52,7 @@ const ocrSectionData: SectionData = {
   description: "신분증 OCR + UI",
   badge: "engineering",
   inspired: "토스 신분증 OCR",
-  dependencies: ["clova-ocr"],
+  dependencies: ["CLOVA-OCR"],
   date: 20240521,
   image: "ocr",
   published: true,

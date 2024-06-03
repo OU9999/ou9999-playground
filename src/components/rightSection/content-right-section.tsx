@@ -20,7 +20,7 @@ const Dependency = (dependency: string) => {
     );
   }
 
-  return <span>dependency</span>;
+  return <span>{dependency}</span>;
 };
 
 const ContentRightSection = ({
