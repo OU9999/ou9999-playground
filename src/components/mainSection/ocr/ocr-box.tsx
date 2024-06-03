@@ -14,9 +14,10 @@ export interface FormCustomData {
 
 const OCRBox = () => {
   const MAX_COUNT = 10;
-  const [imgSrc, setImgSrc] = useState<null | string>(null);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clovaData, setClovaData] = useState<ClovaOCRData | null>(null);
+  const [elapsedTime, setElapsedTime] = useState<number | null>(null);
   const {
     isCertification,
     setCertificationSuccess,
@@ -29,7 +30,11 @@ const OCRBox = () => {
     setIsLoading(true);
 
     const data = await callClovaOCR(formData.select);
-    if (typeof data !== "string") setClovaData(data);
+    console.log(data);
+    if (typeof data !== "string") {
+      setClovaData(data.result);
+      setElapsedTime(data.elapsedTime);
+    }
 
     const currentCount = Number(localStorage.getItem("count") || 0) + 1;
     localStorage.setItem("count", String(currentCount));
@@ -74,7 +79,7 @@ const OCRBox = () => {
       </GridBox>
 
       <GridBox className="p-5 md:p-10">
-        <OCRResult clovaData={clovaData} />
+        <OCRResult clovaData={clovaData} elapsedTime={elapsedTime} />
       </GridBox>
     </div>
   );

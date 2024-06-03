@@ -36,9 +36,15 @@ export interface ClovaOutput {
   images: ClovaImages[];
 }
 
-type ClovaOCR = (select: string) => Promise<ClovaOCRData | string | null>;
+interface ClovaOcrResultData {
+  result: ClovaOCRData | null;
+  elapsedTime: number;
+}
+
+type ClovaOCR = (select: string) => Promise<ClovaOcrResultData | string>;
 
 export const callClovaOCR: ClovaOCR = async (select) => {
+  const startTime = performance.now();
   const url = getUrlFromSelect(select);
   const apiToken = process.env.NEXT_PUBLIC_OCR_TOKEN;
   const apiUrl = process.env.NEXT_PUBLIC_OCR_API;
@@ -68,8 +74,10 @@ export const callClovaOCR: ClovaOCR = async (select) => {
 
     const clovaOutput: ClovaOutput = response.data;
     const data = extractDataFromSelect(select, clovaOutput);
+    const endTime = performance.now();
+    const elapsedTime = endTime - startTime;
 
-    return data;
+    return { result: data, elapsedTime };
   } catch (err) {
     return String(err);
   }

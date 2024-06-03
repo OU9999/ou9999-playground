@@ -1,3 +1,4 @@
+import { convertMillisecondsToSeconds } from "@/util/date-util";
 import { ClovaOCRData } from "@/util/ocr-util";
 
 interface LabelTextProps {
@@ -25,21 +26,30 @@ const LabelText = ({ label, text }: LabelTextProps) => {
 
 interface OCRResultProps {
   clovaData?: ClovaOCRData | null;
+  elapsedTime?: number | null;
 }
 
-const OCRResult = ({ clovaData }: OCRResultProps) => {
+const OCRResult = ({ clovaData, elapsedTime }: OCRResultProps) => {
   return (
-    <div className="w-full flex flex-col space-y-5">
+    <div className="w-full flex flex-col relative">
+      {elapsedTime && (
+        <p className="absolute right-0 top-0">
+          경과 시간 : {convertMillisecondsToSeconds(elapsedTime)}
+        </p>
+      )}
+
       <h1 className="text-3xl mb-5">결과</h1>
 
-      {clovaData &&
-        clovaData.fields.map((field) => (
-          <LabelText
-            key={"LABEL TEXT" + field.title}
-            label={field.title}
-            text={field.text}
-          />
-        ))}
+      <div className="w-full h-auto flex flex-col space-y-3">
+        {clovaData &&
+          clovaData.fields.map((field) => (
+            <LabelText
+              key={"LABEL TEXT" + field.title}
+              label={field.title}
+              text={field.text}
+            />
+          ))}
+      </div>
     </div>
   );
 };
