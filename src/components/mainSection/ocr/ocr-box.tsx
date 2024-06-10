@@ -30,7 +30,6 @@ const OCRBox = () => {
     setIsLoading(true);
 
     const data = await callClovaOCR(formData.select);
-    console.log(data);
     if (typeof data !== "string") {
       setClovaData(data.result);
       setElapsedTime(data.elapsedTime);
