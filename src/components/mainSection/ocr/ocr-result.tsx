@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/components/common/loading-spinner";
 import { convertMillisecondsToSeconds } from "@/util/date-util";
 import { ClovaOCRData } from "@/util/ocr-util";
 
@@ -25,18 +26,20 @@ const LabelText = ({ label, text }: LabelTextProps) => {
 };
 
 interface OCRResultProps {
+  isLoading: boolean;
   clovaData?: ClovaOCRData | null;
   elapsedTime?: number | null;
 }
 
-const OCRResult = ({ clovaData, elapsedTime }: OCRResultProps) => {
+const OCRResult = ({ isLoading, clovaData, elapsedTime }: OCRResultProps) => {
   return (
     <div className="w-full flex flex-col relative">
-      {elapsedTime && (
-        <p className="absolute right-0 top-0">
-          경과 시간 : {convertMillisecondsToSeconds(elapsedTime)}
-        </p>
-      )}
+      <div className="absolute right-0 top-1">
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && elapsedTime && (
+          <p>경과 시간 : {convertMillisecondsToSeconds(elapsedTime)}</p>
+        )}
+      </div>
 
       <h1 className="text-3xl mb-5">결과</h1>
 

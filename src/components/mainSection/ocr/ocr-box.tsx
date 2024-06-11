@@ -78,7 +78,11 @@ const OCRBox = () => {
       </GridBox>
 
       <GridBox className="p-5 md:p-10">
-        <OCRResult clovaData={clovaData} elapsedTime={elapsedTime} />
+        <OCRResult
+          isLoading={isLoading}
+          clovaData={clovaData}
+          elapsedTime={elapsedTime}
+        />
       </GridBox>
     </div>
   );
