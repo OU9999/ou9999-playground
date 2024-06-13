@@ -1,5 +1,10 @@
 import { ClovaImageField, ClovaOutput } from "@/action/ocr-action";
 
+/**
+ * select를 받아 사진 url을 return
+ * @param select "id" | "card" | "driver"
+ * @return 사진 url
+ */
 export const getUrlFromSelect = (select: string) => {
   let result;
 
@@ -25,6 +30,11 @@ export const getUrlFromSelect = (select: string) => {
   return result;
 };
 
+/**
+ * ImageField 에서 동일한 Y축을 가진 4개의 Field 추출
+ * @param fields ClovaImageField[]
+ * @return 4개의 동일한 Y축을 가진 ImageField
+ */
 export const findConsistentYFields = (
   fields: ClovaImageField[]
 ): ClovaImageField[] | null => {
@@ -84,6 +94,12 @@ type ExtractDataFromSelect = (
   data: ClovaOutput
 ) => ClovaOCRData | null;
 
+/**
+ * select에 따라 필요한 객체 반환
+ * @param select "id" | "card" | "driver"
+ * @param data ClovaOutput
+ * @return 타입과 fields 배열을 가진 객체 return
+ */
 export const extractDataFromSelect: ExtractDataFromSelect = (select, data) => {
   let result;
 
