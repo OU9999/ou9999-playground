@@ -41,8 +41,8 @@ const FormSchema = z.object({
       required_error: "프롬프트는 빈칸일 수 없습니다.",
     })
     .min(1, { message: "프롬프트는 빈칸일 수 없습니다." })
-    .regex(/^[a-zA-Z\s,]*$/, {
-      message: "영단어, 공백, 쉼표만 사용 가능합니다.",
+    .regex(/^[a-zA-Z0-9\s,]*$/, {
+      message: "영단어, 숫자, 공백, 쉼표만 사용 가능합니다.",
     }),
   select: z.string({
     required_error: "ai 모델을 선택해야 합니다.",
