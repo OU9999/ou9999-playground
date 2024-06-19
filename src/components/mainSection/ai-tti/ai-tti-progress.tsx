@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const AiProgress = () => {
   return (
-    <Accordion className="mt-10" type="single" collapsible>
+    <Accordion className="my-10" type="single" collapsible>
       <AccordionItem value="item-1" className="">
         <AccordionTrigger>
           <h1 className="text-xl">구현 과정</h1>

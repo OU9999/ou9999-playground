@@ -1,4 +1,5 @@
 import AiTextToImage from "@/components/mainSection/ai-tti/ai-text-to-image";
+import AiTextToImageAdvanced from "@/components/mainSection/ai-tti/ai-tti-advanced";
 import AiProgress from "@/components/mainSection/ai-tti/ai-tti-progress";
 
 import { getMetaDataFromSectionData } from "@/util/meta-data-util";
@@ -28,6 +29,7 @@ const AiTtiDetailPage = () => {
   return (
     <div className="w-full h-auto min-h-dvh">
       <AiTextToImage />
+      <AiTextToImageAdvanced />
       <AiProgress />
     </div>
   );
