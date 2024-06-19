@@ -79,7 +79,7 @@ const AiTextToImageAdvanced = () => {
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>width</FormDescription>
+                <FormDescription>Width of output image</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -95,7 +95,7 @@ const AiTextToImageAdvanced = () => {
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>height</FormDescription>
+                <FormDescription>Height of output image</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -106,12 +106,16 @@ const AiTextToImageAdvanced = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <FormLabelWithType title="num_outputs" type="number" />
+                  <FormLabelWithType
+                    title="num_outputs"
+                    type="number"
+                    desc="(minimum: 1, maximum: 4)"
+                  />
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>num_outputs</FormDescription>
+                <FormDescription>Number of images to output.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -125,12 +129,15 @@ const AiTextToImageAdvanced = () => {
                   <FormLabelWithType
                     title="num_inference_steps"
                     type="number"
+                    desc="(minimum: 1, maximum: 500)"
                   />
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>num_inference_steps</FormDescription>
+                <FormDescription>
+                  Number of denoising steps (Default: 50)
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -141,12 +148,18 @@ const AiTextToImageAdvanced = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <FormLabelWithType title="guidance_scale" type="number" />
+                  <FormLabelWithType
+                    title="guidance_scale"
+                    type="number"
+                    desc="(minimum: 1, maximum: 50)"
+                  />
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>guidance_scale</FormDescription>
+                <FormDescription>
+                  Scale for classifier-free guidance (Default: 7.5)
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -157,12 +170,19 @@ const AiTextToImageAdvanced = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <FormLabelWithType title="lora_scale" type="number" />
+                  <FormLabelWithType
+                    title="lora_scale"
+                    type="number"
+                    desc="(minimum: 0, maximum: 1)"
+                  />
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>lora_scale</FormDescription>
+                <FormDescription>
+                  LoRA additive scale. Only applicable on trained models.
+                  (Default: 0.6)
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -179,7 +199,9 @@ const AiTextToImageAdvanced = () => {
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>high_noise_frac</FormDescription>
+                <FormDescription>
+                  For expert_ensemble_refiner, the fraction of noise to use
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -190,12 +212,19 @@ const AiTextToImageAdvanced = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <FormLabelWithType title="prompt_strength" type="number" />
+                  <FormLabelWithType
+                    title="prompt_strength"
+                    type="number"
+                    desc="(minimum: 0, maximum: 1)"
+                  />
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="number" {...field} />
                 </FormControl>
-                <FormDescription>prompt_strength</FormDescription>
+                <FormDescription>
+                  Prompt strength when using img2img / inpaint. 1.0 corresponds
+                  to full destruction of information in image
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
