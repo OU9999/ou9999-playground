@@ -29,6 +29,7 @@ const AiTtiDetailPage = () => {
   return (
     <div className="w-full h-auto min-h-dvh">
       <AiTextToImage />
+
       <AiTextToImageAdvanced />
       <AiProgress />
     </div>

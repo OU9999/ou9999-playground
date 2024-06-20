@@ -18,7 +18,7 @@ import { FormData, getReplicateOutputSDXL } from "@/action/replicate-action";
 import Image from "next/image";
 import LoadingSpinner from "@/components/common/loading-spinner";
 
-const AiTextToImageAdvanced = () => {
+const AiTextToImageAdvancedBox = () => {
   const MAX_COUNT = 10;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string[] | null>(null);
@@ -69,7 +69,7 @@ const AiTextToImageAdvanced = () => {
   };
 
   return (
-    <GridBox className="my-10 flex flex-col xl:flex-row space-y-10 xl:space-y-0 space-x-0 xl:space-x-5 h-auto justify-center items-center xl:items-start content-center p-10 ">
+    <GridBox className="flex flex-col xl:flex-row space-y-10 xl:space-y-0 space-x-0 xl:space-x-5 h-auto justify-center items-center xl:items-start content-center p-10 ">
       <div className="flex w-72 md:w-96 space-y-2">
         <ReplicateFormAdvanced
           submitFn={getReplicateData}
@@ -107,6 +107,21 @@ const AiTextToImageAdvanced = () => {
         )}
       </div>
     </GridBox>
+  );
+};
+
+const AiTextToImageAdvanced = () => {
+  return (
+    <Accordion className="my-10" type="single" collapsible>
+      <AccordionItem value="item-1" className="">
+        <AccordionTrigger>
+          <h1 className="text-xl">sdxl custom form</h1>
+        </AccordionTrigger>
+        <AccordionContent>
+          <AiTextToImageAdvancedBox />
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   );
 };
 
