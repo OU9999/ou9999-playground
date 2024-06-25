@@ -28,7 +28,7 @@ const aiTtiSectionData: SectionData = {
   description: "next.js 서버 액션 + replicate",
   badge: "engineering",
   inspired: "디시인사이드 ai 이미지 간편 등록",
-  dependencies: ["replicate@^0.29.1", "stable-diffusion@2.1", "sdxl@1"],
+  dependencies: ["replicate@^0.29.1", "stable-diffusion@2.1", "sdxl:7762fd07"],
   date: 20240404,
   image: "ai-tti",
   published: true,
