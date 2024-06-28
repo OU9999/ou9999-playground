@@ -45,19 +45,34 @@ export const findConsistentYFields = (
   for (let i = 0; i <= yValues.length - 4; i++) {
     const group = yValues.slice(i, i + 4);
 
-    const isConsistent = group.every((y, idx, arr) => {
+    const isYConsistent = group.every((y, idx, arr) => {
       if (idx === 0) return true;
       return Math.abs(y - arr[idx - 1]) <= 3;
     });
 
-    if (isConsistent) {
-      const consistentFields = fields.filter((field) =>
-        group.includes(field.boundingPoly.vertices[0].y)
-      );
+    if (!isYConsistent) continue;
 
-      if (consistentFields.length === 4) {
-        return consistentFields;
-      }
+    const consistentFields = fields.filter((field) =>
+      group.includes(field.boundingPoly.vertices[0].y)
+    );
+
+    if (consistentFields.length !== 4) continue;
+
+    const firstField = consistentFields[0];
+    const baseXLength = Math.abs(
+      firstField.boundingPoly.vertices[0].x -
+        firstField.boundingPoly.vertices[1].x
+    );
+
+    const isXConsistent = consistentFields.every((field) => {
+      const currentXLength = Math.abs(
+        field.boundingPoly.vertices[0].x - field.boundingPoly.vertices[1].x
+      );
+      return Math.abs(currentXLength - baseXLength) <= 3;
+    });
+
+    if (isXConsistent) {
+      return consistentFields;
     }
   }
 
