@@ -33,9 +33,9 @@ export const getUrlFromSelect = (select: string) => {
 /**
  * ImageField 에서 동일한 Y축을 가진 4개의 Field 추출
  * @param fields ClovaImageField[]
- * @return 4개의 동일한 Y축을 가진 ImageField
+ * @return 동일한 Y축을 가지고 width가 같은 4개의 ImageField
  */
-export const findConsistentYFields = (
+export const findCardNumberFields = (
   fields: ClovaImageField[]
 ): ClovaImageField[] | null => {
   const yValues = fields
@@ -138,7 +138,7 @@ export const extractDataFromSelect: ExtractDataFromSelect = (select, data) => {
       };
       break;
     case "card":
-      const yFields = findConsistentYFields(data.images[0].fields);
+      const yFields = findCardNumberFields(data.images[0].fields);
       const cardNumber = extractInferTextAndCombine(yFields!);
       const careDate = extractExpirationDate(data.images[0].fields);
 

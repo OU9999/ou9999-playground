@@ -23,7 +23,7 @@ const crossFadeSectionData: SectionData = {
 };
 
 const aiTtiSectionData: SectionData = {
-  title: "AI text-to-image Generator",
+  title: "AI 이미지 생성기",
   link: "ai-tti",
   description: "next.js 서버 액션 + replicate",
   badge: "engineering",
@@ -35,7 +35,7 @@ const aiTtiSectionData: SectionData = {
 };
 
 const valorantSectionData: SectionData = {
-  title: "Valorant Agent Contract",
+  title: "발로란트 요원 계약 UI",
   link: "vac",
   description: "발로란트 스타일 Carousel",
   badge: "ui",
