@@ -65,6 +65,7 @@ export const getReplicateOutputSDXL: ReplicateOutPutSDXL = async (
 
     return output as string[];
   } catch (err) {
+    console.log("this is error", err);
     return String(err);
   }
 };
