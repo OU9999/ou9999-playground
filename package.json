@@ -7,7 +7,9 @@
     "build": "npm run generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "node src/scripts/generateBase64.mjs"
+    "generate": "node src/scripts/generateBase64.mjs",
+    "test:ui": "npx playwright test --ui",
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -35,6 +37,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.2",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^18",

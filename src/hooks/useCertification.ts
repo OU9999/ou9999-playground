@@ -11,6 +11,10 @@ export const useCertification = ({ maxCount }: useCertificationProps) => {
   const [count, setCount] = useState<number>(0);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const isDisabled =
+    process.env.NODE_ENV === "development"
+      ? false
+      : !isCertification || Number(localStorage.getItem("count")!) >= maxCount;
 
   const setCertificationSuccess = (): void => {
     setIsCertification(true);
@@ -64,5 +68,6 @@ export const useCertification = ({ maxCount }: useCertificationProps) => {
     errorMessage,
     setErrorMessage,
     setErrorAndMessage,
+    isDisabled,
   };
 };

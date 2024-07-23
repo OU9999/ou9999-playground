@@ -32,6 +32,7 @@ const AiTextToImage = () => {
     errorMessage,
     setErrorMessage,
     setErrorAndMessage,
+    isDisabled,
   } = useCertification({ maxCount: MAX_COUNT });
 
   const getReplicateData = async (formData: FormCustomData) => {
@@ -78,11 +79,7 @@ const AiTextToImage = () => {
           submitFn={getReplicateData}
           certification={isCertification}
           certificationSuccess={setCertificationSuccess}
-          disable={
-            isLoading ||
-            !isCertification ||
-            Number(localStorage.getItem("count"!)) >= MAX_COUNT
-          }
+          disable={isDisabled || isLoading}
           error={isError}
           errorMessage={errorMessage}
         />

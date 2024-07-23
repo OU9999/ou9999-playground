@@ -24,6 +24,7 @@ const OCRBox = () => {
     setCount,
     isError,
     errorMessage,
+    isDisabled,
   } = useCertification({ maxCount: MAX_COUNT });
 
   const submitFn = async (formData: FormCustomData) => {
@@ -55,11 +56,7 @@ const OCRBox = () => {
               setImgSrc={setImgSrc}
               submitFn={submitFn}
               isCertification={isCertification}
-              isDisable={
-                isLoading ||
-                !isCertification ||
-                Number(localStorage.getItem("count"!)) >= MAX_COUNT
-              }
+              isDisable={isDisabled || isLoading}
               certificationSuccess={setCertificationSuccess}
               error={isError}
               errorMessage={errorMessage}
