@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("홈 페이지 로드 테스트", async ({ page }) => {
+test("ai 이미지 생성 테스트", async ({ page }) => {
   // index 페이지에서 시작 (playwright.config.ts에서 webServer를 통해 baseURL을 설정.)
   await page.goto("/");
 
@@ -16,7 +16,7 @@ test("홈 페이지 로드 테스트", async ({ page }) => {
   // select 선택
   await page.locator("#\\:r1\\:\\-form-item").click();
   await page.waitForSelector("[data-radix-popper-content-wrapper]");
-  await page.click("[aria-labelledby='radix-\\:r9\\:']");
+  await page.click("//div[span[text()='stable-diffusion (realistic style)']]");
 
   // submit
   await page.click("button[type='submit']");
@@ -27,5 +27,6 @@ test("홈 페이지 로드 테스트", async ({ page }) => {
   // 이미지가 올바르게 로드되었는지 확인
   const imgSrc = await page.getAttribute("img[alt='ai-image']", "src");
   expect(imgSrc).not.toBeNull();
-  console.log("이미지가 성공적으로 로드되었습니다:", imgSrc);
+  console.log("이미지가 성공적으로 로드되었습니다.", imgSrc);
+  console.log("src", imgSrc);
 });
