@@ -31,6 +31,7 @@ const AiTextToImageAdvancedBox = () => {
     errorMessage,
     setErrorMessage,
     setErrorAndMessage,
+    isDisabled,
   } = useCertification({ maxCount: MAX_COUNT });
 
   const getReplicateData = async (formData: FormData) => {
@@ -75,11 +76,7 @@ const AiTextToImageAdvancedBox = () => {
           submitFn={getReplicateData}
           certification={isCertification}
           certificationSuccess={setCertificationSuccess}
-          disable={
-            isLoading ||
-            !isCertification ||
-            Number(localStorage.getItem("count"!)) >= MAX_COUNT
-          }
+          disable={isDisabled || isLoading}
           error={isError}
           errorMessage={errorMessage}
         />
